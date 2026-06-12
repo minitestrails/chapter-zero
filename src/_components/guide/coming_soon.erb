@@ -40,7 +40,7 @@
       <% if @convertkit_form_id.to_s.strip != "" %>
         <%= render Shared::NewsletterForm.new(convertkit_form_id: @convertkit_form_id) %>
       <% else %>
-        <p class="text-sm text-base-content/60">Set <code>convertkit_form_id</code> in <code>src/_data/site_metadata.yml</code> to enable the newsletter form.</p>
+        <p class="text-sm text-base-content/60 break-words">Set <code class="break-all">convertkit_form_id</code> in <code class="break-all">src/_data/site_metadata.yml</code> to enable the newsletter form.</p>
       <% end %>
     </div>
   </div>

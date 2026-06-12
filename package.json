@@ -21,5 +21,8 @@
     "postcss-preset-env": "^10.4.0",
     "read-cache": "^1.0.0",
     "tailwindcss": "^4.1.18"
+  },
+  "dependencies": {
+    "bridgetown-quick-search": "^3.0.3"
   }
 }

@@ -11,7 +11,7 @@ layout: default
      end %>
 <% tags = Array(data.tags).map { |t| t.to_s.strip }.reject(&:empty?) %>
 
-<article class="max-w-4xl mx-auto px-4 py-10">
+<article class="max-w-4xl mx-auto px-4 py-6 sm:py-10 min-w-0">
   <header class="relative mb-10 rounded-box border border-base-300 bg-base-200/50 overflow-hidden">
     <div class="absolute inset-x-0 top-0 h-20 bg-gradient-to-br from-primary/15 via-primary/5 to-transparent pointer-events-none" aria-hidden="true"></div>
     <div class="absolute inset-y-0 left-0 w-1 bg-gradient-to-b from-primary via-primary/50 to-transparent" aria-hidden="true"></div>
@@ -26,7 +26,7 @@ layout: default
         <span class="badge badge-primary badge-sm">Blog</span>
       </div>
 
-      <h1 class="text-3xl sm:text-4xl font-bold leading-tight mb-4"><%= data.title %></h1>
+      <h1 class="text-2xl sm:text-4xl font-bold leading-tight mb-4"><%= data.title %></h1>
 
       <% if data.description %>
         <p class="text-lg text-base-content/70 leading-relaxed max-w-2xl"><%= data.description %></p>
@@ -42,7 +42,7 @@ layout: default
     </div>
   </header>
 
-  <div class="prose prose-base max-w-none" data-controller="clipboard">
+  <div class="prose prose-base max-w-none min-w-0 prose-code:break-words prose-pre:overflow-x-auto" data-controller="clipboard">
     <%= yield %>
   </div>
 

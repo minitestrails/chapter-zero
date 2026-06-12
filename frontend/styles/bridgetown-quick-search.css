@@ -1,0 +1,49 @@
+/* Navbar search (bridgetown-quick-search web components) */
+bridgetown-search-form {
+  display: block;
+  width: 100%;
+  position: relative;
+}
+
+bridgetown-search-form form {
+  margin: 0;
+  width: 100%;
+}
+
+bridgetown-search-form input[type="search"] {
+  width: 100%;
+  min-width: 0;
+}
+
+bridgetown-search-results {
+  width: 100%;
+  max-width: 100%;
+  left: 0;
+  right: 0;
+  /* Custom properties inherit into the shadow DOM (light + dark theme vars) */
+  --background: var(--color-base-200);
+  --text-color: var(--color-base-content);
+  --background-dark: var(--color-base-200);
+  --text-color-dark: var(--color-base-content);
+  --link-color: var(--color-primary);
+  --link-color-dark: var(--color-primary);
+  --divider-color: var(--color-base-300);
+  --divider-color-dark: var(--color-base-300);
+  --border-radius: var(--radius-box, 0.5rem);
+  --border-corner-radius: var(--radius-field, 0.25rem);
+}
+
+/* Shadow-part overrides (plugin theme attr ships with a trailing space) */
+bridgetown-search-results::part(inner) {
+  background: var(--color-base-200);
+  color: var(--color-base-content);
+  border: 1px solid var(--color-base-300);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+  max-height: min(70vh, 24rem);
+  overflow-y: auto;
+}
+
+bridgetown-search-results::part(inner-link) {
+  color: var(--color-base-content);
+  cursor: pointer;
+}

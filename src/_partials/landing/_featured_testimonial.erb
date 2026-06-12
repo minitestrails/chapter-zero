@@ -5,7 +5,7 @@
 <% prepared = testimonial_data(featured) %>
 <% entry = prepared[:entry] %>
 
-<section class="py-12 px-6 bg-base-200/80 border-b border-base-300" aria-label="Featured testimonial">
+<section class="py-12 px-4 sm:px-6 bg-base-200/80 border-b border-base-300" aria-label="Featured testimonial">
   <div class="max-w-4xl mx-auto">
     <div class="card">
       <div class="card-body p-6 md:p-8">
@@ -15,7 +15,7 @@
           </div>
 
           <div class="relative pl-2 md:pl-8 text-center md:text-left">
-            <p class="text-xl md:text-2xl font-light text-base-content leading-relaxed mb-8 [&_.testimonial-highlight]:text-base-content">
+            <p class="text-lg sm:text-xl md:text-2xl font-light text-base-content leading-relaxed mb-8 [&_.testimonial-highlight]:text-base-content">
               <%= raw(prepared[:feedback_html]) %>
             </p>
 

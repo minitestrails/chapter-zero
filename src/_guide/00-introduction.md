@@ -38,12 +38,54 @@ Open [http://localhost:4000](http://localhost:4000) (override with `PORT` if nee
 - **Privacy page**: starter copy at `src/privacy.md`, published at `/privacy` and linked from the footer. Edit it to describe your analytics, newsletter, support links, and contact form.
 - **OG images**: per-chapter and per-post 1200×630 PNGs at build time
 - **Netlify-friendly contact form** markup on `/contact`
+- **Site search**: real-time Lunr search in the header via [bridgetown-quick-search](https://github.com/bridgetownrb/bridgetown-quick-search); indexes guide chapters, blog posts, and pages
+- **Heading anchors**: `#` permalinks on `h2`–`h4` in guide and blog content (`plugins/builders/heading_anchors.rb`)
+- **Code copy**: copy-to-clipboard buttons on fenced code blocks (Stimulus `clipboard` controller on guide and blog prose)
+- **Stimulus**: [Hotwired Stimulus](https://stimulus.hotwired.dev/) for client-side behavior—not included in stock Bridgetown (see [JavaScript with Stimulus](#javascript-with-stimulus) below)
 
 ## Bridgetown
 
 Chapter Zero is a static site built with [Bridgetown](https://www.bridgetownrb.com/). Collections (`guide`, `blog`), layouts, partials, plugins, and `bin/bridgetown deploy` all follow Bridgetown conventions.
 
 For configuration, content model, and deployment details, use the official documentation: [bridgetownrb.com/docs](https://www.bridgetownrb.com/docs).
+
+## JavaScript with Stimulus {#javascript-with-stimulus}
+
+Bridgetown bundles frontend assets with esbuild and a `frontend/javascript/index.js` entrypoint, but **does not ship Stimulus by default**. Chapter Zero adds [Hotwired Stimulus](https://stimulus.hotwired.dev/) for small, declarative client-side behavior.
+
+### What's set up {#stimulus-setup}
+
+- **Package**: `@hotwired/stimulus` in `package.json`
+- **Bootstrap**: `frontend/javascript/index.js` starts a Stimulus application and exposes it as `window.Stimulus`
+- **Controllers**: files in `frontend/javascript/controllers/` named `*_controller.js` (or `*-controller.js`) are auto-registered at build time
+
+The identifier comes from the filename: `clipboard_controller.js` → `data-controller="clipboard"`. Nested folders use double dashes (`folder/foo_controller.js` → `data-controller="folder--foo"`).
+
+### Adding a controller {#stimulus-adding}
+
+1. Create `frontend/javascript/controllers/my_feature_controller.js`
+2. Extend Stimulus's `Controller` class
+3. Attach it in a template with `data-controller="my-feature"`
+
+```javascript
+import { Controller } from "@hotwired/stimulus"
+
+export default class extends Controller {
+  connect() {
+    // runs when the element appears in the DOM
+  }
+}
+```
+
+Use `data-action` attributes to wire events (for example `data-action="click->my-feature#handleClick"`). Restart or let `bin/dev` rebuild the frontend bundle after you add or change controllers.
+
+### Controllers in use {#stimulus-controllers}
+
+| Controller | Where | Purpose |
+| --- | --- | --- |
+| `clipboard` | `guide_chapter.erb`, `blog_post.erb` prose wrapper | Copy buttons on fenced code blocks |
+
+See [Code copy](#code-copy) for details on the clipboard controller.
 
 ## Theming with DaisyUI {#theming-with-daisyui}
 
@@ -96,6 +138,53 @@ Use `is_coming_soon: true` for chapters you have not published yet: readers see 
 
 Set `hide_content_feedback: true` on a guide chapter or blog post to hide the feedback link at the bottom of the page.
 
+## Site search {#site-search}
+
+Search is powered by [bridgetown-quick-search](https://github.com/bridgetownrb/bridgetown-quick-search). The bar lives in `src/_partials/_header.erb` and indexes guide chapters, blog posts, and pages at build time into `/bridgetown_quick_search/index.json`.
+
+### Excluding or customizing indexed content {#search-index}
+
+Front matter on any page or collection document:
+
+- `exclude_from_search: true` — omit from the index (used on the landing page, contact, and privacy)
+- `quick_search_content: "…"` — override the text indexed for that page (defaults to rendered page content)
+
+### Component options {#search-component-options}
+
+The search component accepts Liquid variables (see `_header.erb` for the live config):
+
+| Variable | Description |
+| --- | --- |
+| `placeholder` | Input placeholder text |
+| `input_class` | CSS classes on the search input |
+| `theme` | `"dark"` or `"light"` (popup theme) |
+| `snippet_length` | Character length of each result snippet (default 142) |
+| `display_collection` | Show which collection each result belongs to |
+
+### Styling search results {#search-styling}
+
+The results popup is a shadow-DOM web component. Tweak it in `frontend/styles/bridgetown-quick-search.css` with CSS variables on `bridgetown-search-results` (`--link-color`, `--divider-color`, `--text-color`, `--border-radius`) or `::part()` selectors. See the [plugin README](https://github.com/bridgetownrb/bridgetown-quick-search#styling) for details.
+
+## Reader experience extras {#reader-extras}
+
+These are small UX additions on top of stock Bridgetown—they ship with Chapter Zero and need no extra setup.
+
+### Heading anchors {#heading-anchors}
+
+`plugins/builders/heading_anchors.rb` adds a `#` link after every `h2`, `h3`, and `h4` inside `<article>` that has an `id`. Readers can click or copy a permalink to that section.
+
+Give headings stable IDs in Markdown with Kramdown's attribute list syntax:
+
+```markdown
+## Local development {#local-development}
+```
+
+Styles live in `frontend/styles/guide-chapter.css` (`scroll-margin-top` keeps anchored headings clear of the header). Try the `#` links on headings in this chapter.
+
+### Code copy {#code-copy}
+
+Guide chapters and blog posts wrap prose in `data-controller="clipboard"` (`guide_chapter.erb` and `blog_post.erb`). The Stimulus controller in `frontend/javascript/controllers/clipboard_controller.js` adds a copy button to each `pre.highlight` block. Styles are in `frontend/styles/clipboard.css`. No extra markup in your Markdown—fenced code blocks with a language tag get copy buttons automatically. See [JavaScript with Stimulus](#javascript-with-stimulus) for how controllers are registered.
+
 ## Writing chapter content
 
 ### Tip callouts
@@ -107,7 +196,7 @@ Set `hide_content_feedback: true` on a guide chapter or blog post to hide the fe
 
 ### Code blocks
 
-Use fenced blocks with a language tag:
+Use fenced blocks with a language tag. Each block gets a **copy** button on hover (see [Code copy](#code-copy) above):
 
 ```ruby
 class Example

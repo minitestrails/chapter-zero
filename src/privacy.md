@@ -1,10 +1,11 @@
 ---
 title: Privacy
 layout: default
+exclude_from_search: true
 ---
 
 <div class="max-w-6xl mx-auto px-4 py-12">
-  <h1 class="text-3xl font-bold mb-6">Privacy</h1>
+  <h1 class="text-2xl sm:text-3xl font-bold mb-6">Privacy</h1>
 
   <p class="text-base-content/80 mb-6">
     This site is mostly static pages. We keep tracking light and only use a few third-party services.

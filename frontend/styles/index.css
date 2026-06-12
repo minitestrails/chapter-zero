@@ -8,6 +8,7 @@
 @import "testimonial-highlight.css";
 @import "clipboard.css";
 @import "landing.css";
+@import "bridgetown-quick-search.css";
 
 /* If you need to add @import statements, add them above plugins */
 @plugin "daisyui" {

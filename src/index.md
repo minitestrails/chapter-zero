@@ -1,5 +1,6 @@
 ---
 layout: default
+exclude_from_search: true
 image:
   path: /images/og-image.png
   width: 1200
@@ -15,7 +16,7 @@ image:
 <%= render "landing/newsletter" %>
 <%= render "landing/blog_posts" %>
 
-<section id="about-the-author" class="py-20 px-6 scroll-mt-6" aria-labelledby="about-the-author-heading">
+<section id="about-the-author" class="py-12 sm:py-20 px-4 sm:px-6 scroll-mt-6" aria-labelledby="about-the-author-heading">
   <div class="max-w-3xl mx-auto">
     <%= render "landing/author_card" %>
   </div>
