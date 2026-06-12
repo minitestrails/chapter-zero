@@ -12,7 +12,14 @@
       </div>
 
       <div class="flex flex-wrap justify-center gap-3 sm:gap-4">
-        <%= render Shared::Button.new(text: "Read the introduction", href: "/guide/introduction", classes: "btn-primary") %>
+        <% if show_chapter_zero_intro? %>
+          <div class="flex flex-col items-center gap-2">
+            <%= render Shared::Button.new(text: "Read Chapter Zero Introduction", href: chapter_zero_intro_url, classes: "btn-primary") %>
+            <p class="text-sm text-base-content/70"><em>*This is a development-only chapter.</em></p>
+          </div>
+        <% end %>
+
+        <%= render Shared::Button.new(text: "Read the first lesson", href: "/guide/lesson-one", classes: "btn-primary") %>
         <%= render Shared::Button.new(text: "Browse all chapters", href: "/guide", classes: "btn-outline") %>
       </div>
 

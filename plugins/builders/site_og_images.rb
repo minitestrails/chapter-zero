@@ -29,6 +29,9 @@ module SiteOgImage
   FOOTER_FONT = 14
   CACHED_BACKGROUND_NAME = "_background-1200x630.png"
   BACKGROUND_SVG_NAME = "og-background.png"
+  BACKGROUND_FILL = "#1a202c"
+  # Matches landing hero / collection header (.hero-bg::before opacity)
+  BACKGROUND_OPACITY = 0.22
 
   def default_background_path(root_dir: nil)
     candidates = []
@@ -297,11 +300,11 @@ module SiteOgImage
   end
 
   def background_layer(use_background)
-    if use_background
-      %(<image href="#{BACKGROUND_SVG_NAME}" x="0" y="0" width="#{WIDTH}" height="#{HEIGHT}"/>\n)
-    else
-      %(<rect width="#{WIDTH}" height="#{HEIGHT}" fill="#1a202c"/>\n)
-    end
+    base = %(<rect width="#{WIDTH}" height="#{HEIGHT}" fill="#{BACKGROUND_FILL}"/>\n)
+    return base unless use_background
+
+    base +
+      %(<image href="#{BACKGROUND_SVG_NAME}" x="0" y="0" width="#{WIDTH}" height="#{HEIGHT}" opacity="#{BACKGROUND_OPACITY}"/>\n)
   end
 
   def rsvg_rasterize(svg, background_file: nil)

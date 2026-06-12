@@ -11,16 +11,23 @@ It is the foundational setup you need before diving into actual content: a landi
 ```sh
 git clone https://github.com/minitestrails/chapter-zero.git
 cd chapter-zero
-bundle install && npm install
-cp .env.sample .env
+bin/setup
 bin/dev
 ```
 
-Copy `.env.sample` to `.env` so Bridgetown runs in development mode locally (`BRIDGETOWN_ENV=development`). That keeps analytics off and uses your dev Stripe support link when configured.
+`bin/setup` installs Ruby gems and npm packages, creates `.env` from `.env.sample` when missing, and runs an initial site build. `.env` sets `BRIDGETOWN_ENV=development` so analytics stay off and your dev Stripe support link is used when configured.
+
+### Prerequisites
+
+- **Ruby** — version in `.ruby-version` (rbenv, asdf, or chruby recommended)
+- **Node.js** + **npm** — for Tailwind, esbuild, and Stimulus
+- **Optional:** ImageMagick (`magick` or `convert`) and `rsvg-convert` (librsvg) for build-time OG PNG generation (see [OG images](#og-images))
 
 Open [http://localhost:4000](http://localhost:4000) (override with `PORT` if needed).
 
-After setup, customize site metadata and landing partials below, then add your curriculum starting at `src/_guide/02-your-topic.md`. `/guide/lesson-one` ships as a **coming soon** placeholder so you can see how unpublished chapters look in the sidebar. The same content lives in the [introduction chapter](https://minitestrails.com/guide/introduction) on the built site.
+**Read the [introduction chapter](/guide/introduction-chapter-zero/) first** while running `bin/dev` before customizing anything. It explains what ships in the box, how search and OG images work, and the customize checklist—skipping it means re-discovering the same wiring by trial and error. Chapter 0 has `development_only: true` and is omitted from production builds.
+
+After setup, customize site metadata and landing partials, then add your first lesson at `src/_guide/01-your-topic.md` (chapter 1). `/guide/lesson-one` ships as a **coming soon** placeholder so you can see how unpublished chapters look in the sidebar.
 
 ## What ships in the box
 
@@ -37,7 +44,7 @@ After setup, customize site metadata and landing partials below, then add your c
 - **Site search**: real-time Lunr search in the header via [bridgetown-quick-search](https://github.com/bridgetownrb/bridgetown-quick-search); indexes guide chapters, blog posts, and pages
 - **Heading anchors**: `#` permalinks on `h2`–`h4` in guide and blog content (`plugins/builders/heading_anchors.rb`)
 - **Code copy**: copy-to-clipboard buttons on fenced code blocks (Stimulus `clipboard` controller on guide and blog prose)
-- **Stimulus**: [Hotwired Stimulus](https://stimulus.hotwired.dev/) for client-side behavior—not included in stock Bridgetown (see [JavaScript with Stimulus](#javascript-with-stimulus) below)
+- **Stimulus**: [Hotwired Stimulus](https://stimulus.hotwired.dev/) for client-side behavior that is not included in stock Bridgetown (see [JavaScript with Stimulus](#javascript-with-stimulus) below)
 
 ## Bridgetown
 
@@ -106,7 +113,7 @@ Work through these before you write lesson one:
 3. **`src/_data/testimonials.yml`**: reader quotes (`feedback`, `highlighted_text`, optional `image_path` for site images or `image_url` for external URLs). Set `featured: true` on one entry for the spotlight; the masonry grid shows up to `testimonials_max` more (default 5 in `site_metadata.yml`).
 4. **`src/images/`**: logo, favicon, `blog-og-background.png`, `og-image.png` (keep default OG paths in sync with `image` front matter on `index.md` and `guide.md`)
 5. **`config/initializers.rb`**: set production `url` to your domain (`https://yourdomain.com`)
-6. **`src/_guide/02-…`**: your first real content chapter (keep `00-introduction.md`; replace or delete the sample lesson-one placeholder when you are ready)
+6. **`src/_guide/01-…`**: your first real content chapter at order 1 (replace or delete the sample lesson-one placeholder when you are ready). Keep `00-introduction-chapter-zero.md` for local docs—it does not publish to production.
 
 Set `show_chapter_zero_credit: false` in `site_metadata.yml` if you do not want the footer link to [minitestrails.com/chapter-zero](https://minitestrails.com/chapter-zero).
 
@@ -121,7 +128,7 @@ Guide chapters are Markdown in `src/_guide/` with front matter like:
 ```yaml
 title: Your chapter title
 description: One line for cards and OG images
-order: 2
+order: 1
 layout: guide_chapter
 slug: your-url-segment
 featured: true  # optional; show on the landing page featured chapters section (sorted by order)
@@ -133,6 +140,8 @@ The `slug` becomes `/guide/your-url-segment/`. `order` controls sidebar sort and
 Use `is_coming_soon: true` for chapters you have not published yet: readers see the coming-soon card and newsletter prompt instead of body content (see `/guide/lesson-one`).
 
 Set `hide_content_feedback: true` on a guide chapter or blog post to hide the feedback link at the bottom of the page.
+
+Set `development_only: true` to include a resource only in development builds (chapter 0 uses this). Production builds omit it from the site, sidebar, search, and OG output.
 
 ## Site search
 
@@ -183,29 +192,54 @@ Guide chapters and blog posts wrap prose in `data-controller="clipboard"` (`guid
 
 ## Writing chapter content
 
+Guide chapters and blog posts are Markdown (Kramdown + GFM). For a rendered reference of headings, lists, code, tables, footnotes, and more, see the sample post `/blog/hello-world` ([Hello from the blog](https://minitestrails.com/blog/hello-world/)).
+
 ### Tip callouts
 
-Render callouts with `Shared::Tip` in guide Markdown via ERB. In `.erb` files use a single `%`; in guide Markdown escape as `%%` so Bridgetown does not evaluate at build time.
+Render callouts with `Shared::Tip` in guide Markdown via ERB. In `.erb` files use a single `%`; in guide Markdown escape as `%%` so Bridgetown does not evaluate at build time. Blog posts are plain Markdown—no ERB components.
 
 ### Code blocks
 
-Use fenced blocks with a language tag. Each block gets a **copy** button on hover (see [Code copy](#code-copy) above):
-
-```ruby
-class Example
-  def greet
-    "Hello from your guide"
-  end
-end
-```
+Fenced blocks with a language tag get syntax highlighting and a **copy** button (see [Code copy](#code-copy)). Examples are in the [Markdown reference post](https://minitestrails.com/blog/hello-world/#inline-and-fenced-code).
 
 ### Blog posts
 
 Posts live in `src/_blog/` with `layout: blog_post`, a `date`, and a `slug`. They appear on the landing page and at `/blog`.
 
-## OG image build dependencies
+## OG images
 
-Chapter and blog posts can get auto-generated PNGs under `output/og/`. The build needs:
+Chapter and blog posts get auto-generated 1200×630 PNGs at build time (saved under `output/og/`).
+
+### Preview in the browser
+
+During `bin/dev`, open any OG image directly in the browser by inserting `/og/` into the page URL and appending `.png`:
+
+```
+http://localhost:4000/og/guide/introduction-chapter-zero.png
+```
+
+The pattern is `/og/{collection}/{slug}.png` for `guide` and `blog` collections. Examples:
+
+- Guide chapter: `/og/guide/introduction-chapter-zero.png` (matches `/guide/introduction-chapter-zero/` in development)
+- Blog post: `/og/blog/hello-world.png` (matches `/blog/hello-world/`)
+
+In production, swap the host: `https://yourdomain.com/og/guide/your-chapter-slug.png`.
+
+### Dynamic OG routes
+
+The `/og/…` URLs are served by a Roda route in `server/routes/og_image.rb`. During `bin/dev`, if a pre-built PNG is missing, the route generates one on the fly from `output/og/{collection}/manifest.json`.
+
+Only collections listed in `OG_COLLECTIONS` are handled:
+
+```ruby
+OG_COLLECTIONS = %w[guide blog].freeze
+```
+
+If you add a new collection and want the same `/og/{collection}/{slug}.png` previews, add its label to `OG_COLLECTIONS` in `server/routes/og_image.rb`. For build-time PNG generation, update the matching `OG_COLLECTIONS` constant in `plugins/builders/site_og_images.rb` as well.
+
+### Build dependencies
+
+The build needs:
 
 - **ImageMagick** (`magick` or `convert` on PATH)
 - **rsvg-convert** (librsvg)

@@ -7,3 +7,5 @@ layout: guide_chapter
 slug: lesson-one
 is_coming_soon: true
 ---
+
+Update this chapter when you are ready. Remove `is_coming_soon: true` from the front matter above and replace this text with your lesson content.

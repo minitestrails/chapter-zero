@@ -13,7 +13,7 @@
           <h3 class="card-title text-lg">Read chapter zero</h3>
           <p class="text-sm text-base-content/70 grow">Learn what ships in the box - layouts, collections, YAML config, and where your content files live.</p>
           <div class="card-actions justify-start mt-2">
-            <a href="<%= relative_url '/guide/introduction' %>" class="hover:underline hover:text-primary">Read the introduction →</a>
+            <a href="/guide/introduction-chapter-zero" class="hover:underline hover:text-primary">Read the introduction →</a>
           </div>
         </div>
       </li>
@@ -24,7 +24,7 @@
           <h3 class="card-title text-lg">Customize the scaffold</h3>
           <p class="text-sm text-base-content/70 grow">Set your title and tagline in site_metadata.yml, edit landing partials under src/_partials/landing/, and swap placeholder images.</p>
           <div class="card-actions justify-start mt-2">
-            <a href="<%= relative_url '/guide/introduction#customize' %>" class="hover:underline hover:text-primary">Open the checklist →</a>
+            <a href="/guide/introduction-chapter-zero#customize" class="hover:underline hover:text-primary">Open the checklist →</a>
           </div>
         </div>
       </li>
@@ -33,7 +33,7 @@
         <div class="card-body">
           <span class="w-fit mb-2"><%= render Shared::Badge.new(text: "Step 3", classes: "badge-primary badge-outline badge-sm") %></span>
           <h3 class="card-title text-lg">Publish lesson one</h3>
-          <p class="text-sm text-base-content/70 grow">Add src/_guide/02-your-topic.md with order, slug, and layout guide_chapter. Use is_coming_soon until you are ready.</p>
+          <p class="text-sm text-base-content/70 grow">Add src/_guide/01-your-topic.md with order 1, slug, and layout guide_chapter. Use is_coming_soon until you are ready.</p>
           <div class="card-actions justify-start mt-2">
             <a href="<%= relative_url '/guide/lesson-one' %>" class="hover:underline hover:text-primary">Preview a placeholder chapter →</a>
           </div>
@@ -42,7 +42,7 @@
     </ol>
 
     <p class="mt-8 text-center">
-      <%= render Shared::Button.new(text: "Open the introduction", href: "/guide/introduction", classes: "btn-primary") %>
+      <%= render Shared::Button.new(text: "Open the introduction", href: "/guide/introduction-chapter-zero", classes: "btn-primary") %>
     </p>
   </div>
 </section>
