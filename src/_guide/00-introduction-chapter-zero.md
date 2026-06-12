@@ -1,33 +1,39 @@
-# Chapter Zero
+---
+title: Introduction to Chapter Zero
+description: What Chapter Zero includes, how to customize it, and how to publish your first lesson.
+order: 0
+featured: true
+layout: guide_chapter
+slug: introduction-chapter-zero
+development_only: true
+---
 
-**Chapter Zero** is the Bridgetown starter for technical guides. Scaffolding before your first real chapter.
+Welcome to Chapter Zero. This is the meta chapter: it explains the scaffold, not your topic yet.
 
-It is the foundational setup you need before diving into actual content: a landing page, ordered chapters with a sidebar, blog, contact form, newsletter slot, support banner, and auto-generated social preview images. Like "chapter 0" in a book, it is the starting point. You bring the lessons.
+Chapter Zero is the foundational setup before your real content: a landing page, ordered chapters with a sidebar, blog, contact form, newsletter slot, support banner, and auto-generated social preview images. Like "chapter 0" in a book, it is the starting point. You bring the lessons.
 
-[minitestrails.com](https://minitestrails.com) runs a full curriculum on this shell.
+After you finish this chapter, customize site metadata and landing partials below, then add your first real lesson at `src/_guide/01-your-topic.md` (chapter 1). [Lesson one](/guide/lesson-one) ships as a **coming soon** placeholder so you can see how unpublished chapters look in the sidebar.
 
-## Quickstart
+This chapter has `development_only: true` in front matter—it is included when you run `bin/dev` or build with `BRIDGETOWN_ENV=development`, and omitted from production builds so only your curriculum ships.
+
+## Local development {#local-development}
+
+From the project root after cloning:
 
 ```sh
-git clone https://github.com/minitestrails/chapter-zero.git
-cd chapter-zero
 bin/setup
 bin/dev
 ```
 
-`bin/setup` installs Ruby gems and npm packages, creates `.env` from `.env.sample` when missing, and runs an initial site build. `.env` sets `BRIDGETOWN_ENV=development` so analytics stay off and your dev Stripe support link is used when configured.
+`bin/setup` installs Ruby gems (`bundle install`), npm packages, creates `.env` from `.env.sample` if missing, and runs an initial `bin/bridgetown build`. `.env` sets `BRIDGETOWN_ENV=development` so analytics stay off and your dev Stripe support link is used when configured.
 
-### Prerequisites
+### Prerequisites {#prerequisites}
 
-- **Ruby** — version in `.ruby-version` (rbenv, asdf, or chruby recommended)
-- **Node.js** + **npm** — for Tailwind, esbuild, and Stimulus
-- **Optional:** ImageMagick (`magick` or `convert`) and `rsvg-convert` (librsvg) for build-time OG PNG generation (see [OG images](#og-images))
+- **Ruby** — match `.ruby-version` (rbenv, asdf, or chruby recommended)
+- **Node.js** + **npm** — frontend bundling (Tailwind, esbuild, Stimulus)
+- **Optional:** ImageMagick (`magick` or `convert`) and `rsvg-convert` (librsvg) for build-time OG PNGs (see [OG images](#og-images)); dynamic `/og/…` previews in `bin/dev` work without them
 
-Open [http://localhost:4000](http://localhost:4000) (override with `PORT` if needed).
-
-**Read the [introduction chapter](/guide/introduction-chapter-zero/) first** while running `bin/dev` before customizing anything. It explains what ships in the box, how search and OG images work, and the customize checklist—skipping it means re-discovering the same wiring by trial and error. Chapter 0 has `development_only: true` and is omitted from production builds.
-
-After setup, customize site metadata and landing partials, then add your first lesson at `src/_guide/01-your-topic.md` (chapter 1). `/guide/lesson-one` ships as a **coming soon** placeholder so you can see how unpublished chapters look in the sidebar.
+Open [http://localhost:4000](http://localhost:4000) (override with `PORT` if needed). Use `bin/dev` rather than `bin/bridgetown start` so you pick up the same defaults as the rest of this project.
 
 ## What ships in the box
 
@@ -52,11 +58,11 @@ Chapter Zero is a static site built with [Bridgetown](https://www.bridgetownrb.c
 
 For configuration, content model, and deployment details, use the official documentation: [bridgetownrb.com/docs](https://www.bridgetownrb.com/docs).
 
-## JavaScript with Stimulus
+## JavaScript with Stimulus {#javascript-with-stimulus}
 
 Bridgetown bundles frontend assets with esbuild and a `frontend/javascript/index.js` entrypoint, but **does not ship Stimulus by default**. Chapter Zero adds [Hotwired Stimulus](https://stimulus.hotwired.dev/) for small, declarative client-side behavior.
 
-### What's set up
+### What's set up {#stimulus-setup}
 
 - **Package**: `@hotwired/stimulus` in `package.json`
 - **Bootstrap**: `frontend/javascript/index.js` starts a Stimulus application and exposes it as `window.Stimulus`
@@ -64,7 +70,7 @@ Bridgetown bundles frontend assets with esbuild and a `frontend/javascript/index
 
 The identifier comes from the filename: `clipboard_controller.js` → `data-controller="clipboard"`. Nested folders use double dashes (`folder/foo_controller.js` → `data-controller="folder--foo"`).
 
-### Adding a controller
+### Adding a controller {#stimulus-adding}
 
 1. Create `frontend/javascript/controllers/my_feature_controller.js`
 2. Extend Stimulus's `Controller` class
@@ -82,7 +88,7 @@ export default class extends Controller {
 
 Use `data-action` attributes to wire events (for example `data-action="click->my-feature#handleClick"`). Restart or let `bin/dev` rebuild the frontend bundle after you add or change controllers.
 
-### Controllers in use
+### Controllers in use {#stimulus-controllers}
 
 | Controller | Where | Purpose |
 | --- | --- | --- |
@@ -90,7 +96,7 @@ Use `data-action` attributes to wire events (for example `data-action="click->my
 
 See [Code copy](#code-copy) for details on the clipboard controller.
 
-## Theming with DaisyUI
+## Theming with DaisyUI {#theming-with-daisyui}
 
 The UI is styled with [DaisyUI](https://daisyui.com/) component classes on top of Tailwind CSS v4. Buttons, cards, alerts, the support banner, and most layout chrome use DaisyUI patterns.
 
@@ -104,16 +110,16 @@ The active theme is set in `frontend/styles/index.css`:
 
 To add themes, change the default, or customize colors and radius, follow the [DaisyUI themes documentation](https://daisyui.com/docs/themes/). After you change CSS, restart `bin/dev` so Tailwind picks up the update.
 
-## Customize checklist
+## Customize checklist {#customize}
 
 Work through these before you write lesson one:
 
 1. **`src/_data/site_metadata.yml`**: title, tagline, email, logo and favicon paths, `testimonials_max`, `hide_suggest_topic`, optional `convertkit_form_id` + `convertkit_account`, Stripe `support_url` / `support_url_development`, `google_analytics_id`, `contact_form_action`
-2. **`src/_partials/landing/`**: landing page sections (hero, steps, audience, newsletter, author card, and so on). Edit the markup in place or remove `<%= render "landing/…" %>` lines from `src/index.md` for sections you do not want.
+2. **`src/_partials/landing/`**: landing page sections (hero, steps, audience, newsletter, author card, and so on). Edit the markup in place or remove the matching landing `render` lines from `src/index.md` for sections you do not want.
 3. **`src/_data/testimonials.yml`**: reader quotes (`feedback`, `highlighted_text`, optional `image_path` for site images or `image_url` for external URLs). Set `featured: true` on one entry for the spotlight; the masonry grid shows up to `testimonials_max` more (default 5 in `site_metadata.yml`).
 4. **`src/images/`**: logo, favicon, `blog-og-background.png`, `og-image.png` (keep default OG paths in sync with `image` front matter on `index.md` and `guide.md`)
 5. **`config/initializers.rb`**: set production `url` to your domain (`https://yourdomain.com`)
-6. **`src/_guide/01-…`**: your first real content chapter at order 1 (replace or delete the sample lesson-one placeholder when you are ready). Keep `00-introduction-chapter-zero.md` for local docs—it does not publish to production.
+6. **`src/_guide/01-…`**: your first real content chapter at order 1 (replace or delete the sample [lesson one](/guide/lesson-one) placeholder when you are ready). Keep `00-introduction-chapter-zero.md` for local scaffold docs—it does not publish to production.
 
 Set `show_chapter_zero_credit: false` in `site_metadata.yml` if you do not want the footer link to [minitestrails.com/chapter-zero](https://minitestrails.com/chapter-zero).
 
@@ -137,24 +143,32 @@ hide_content_feedback: true  # optional; omit or set false to show the feedback 
 
 The `slug` becomes `/guide/your-url-segment/`. `order` controls sidebar sort and featured chapter order on the landing page.
 
-Use `is_coming_soon: true` for chapters you have not published yet: readers see the coming-soon card and newsletter prompt instead of body content (see `/guide/lesson-one`).
+Use `is_coming_soon: true` for chapters you have not published yet (see [Coming soon chapters](#coming-soon)). [Lesson one](/guide/lesson-one) ships with that flag so you can preview the sidebar entry and card.
 
 Set `hide_content_feedback: true` on a guide chapter or blog post to hide the feedback link at the bottom of the page.
 
-Set `development_only: true` to include a resource only in development builds (chapter 0 uses this). Production builds omit it from the site, sidebar, search, and OG output.
+Set `development_only: true` to ship a page only when `BRIDGETOWN_ENV=development` (this chapter uses that flag). Production builds drop those resources from the site, sidebar, search index, and OG output.
 
-## Site search
+## Coming soon chapters {#coming-soon}
+
+Set `is_coming_soon: true` in front matter while a chapter is still in progress. The chapter stays in the sidebar, but readers see the card below (and the newsletter prompt) instead of body content:
+
+<%= render Guide::ComingSoon.new(site_metadata: site.data.site_metadata) %>
+
+When you are ready to publish, remove `is_coming_soon` (or set it to `false`) and write your lesson. Customize the default copy in `src/_components/guide/coming_soon.rb` if you want different messaging.
+
+## Site search {#site-search}
 
 Search is powered by [bridgetown-quick-search](https://github.com/bridgetownrb/bridgetown-quick-search). The bar lives in `src/_partials/_header.erb` and indexes guide chapters, blog posts, and pages at build time into `/bridgetown_quick_search/index.json`.
 
-### Excluding or customizing indexed content
+### Excluding or customizing indexed content {#search-index}
 
 Front matter on any page or collection document:
 
 - `exclude_from_search: true` — omit from the index (used on the landing page, contact, and privacy)
 - `quick_search_content: "…"` — override the text indexed for that page (defaults to rendered page content)
 
-### Component options
+### Component options {#search-component-options}
 
 The search component accepts Liquid variables (see `_header.erb` for the live config):
 
@@ -166,15 +180,15 @@ The search component accepts Liquid variables (see `_header.erb` for the live co
 | `snippet_length` | Character length of each result snippet (default 142) |
 | `display_collection` | Show which collection each result belongs to |
 
-### Styling search results
+### Styling search results {#search-styling}
 
 The results popup is a shadow-DOM web component. Tweak it in `frontend/styles/bridgetown-quick-search.css` with CSS variables on `bridgetown-search-results` (`--link-color`, `--divider-color`, `--text-color`, `--border-radius`) or `::part()` selectors. See the [plugin README](https://github.com/bridgetownrb/bridgetown-quick-search#styling) for details.
 
-## Reader experience extras
+## Reader experience extras {#reader-extras}
 
 These are small UX additions on top of stock Bridgetown—they ship with Chapter Zero and need no extra setup.
 
-### Heading anchors
+### Heading anchors {#heading-anchors}
 
 `plugins/builders/heading_anchors.rb` adds a `#` link after every `h2`, `h3`, and `h4` inside `<article>` that has an `id`. Readers can click or copy a permalink to that section.
 
@@ -184,33 +198,66 @@ Give headings stable IDs in Markdown with Kramdown's attribute list syntax:
 ## Local development {#local-development}
 ```
 
-Styles live in `frontend/styles/guide-chapter.css` (`scroll-margin-top` keeps anchored headings clear of the header).
+Styles live in `frontend/styles/guide-chapter.css` (`scroll-margin-top` keeps anchored headings clear of the header). Try the `#` links on headings in this chapter.
 
-### Code copy
+### Code copy {#code-copy}
 
 Guide chapters and blog posts wrap prose in `data-controller="clipboard"` (`guide_chapter.erb` and `blog_post.erb`). The Stimulus controller in `frontend/javascript/controllers/clipboard_controller.js` adds a copy button to each `pre.highlight` block. Styles are in `frontend/styles/clipboard.css`. No extra markup in your Markdown—fenced code blocks with a language tag get copy buttons automatically. See [JavaScript with Stimulus](#javascript-with-stimulus) for how controllers are registered.
 
-## Writing chapter content
+Try the **Copy** button on this block:
 
-Guide chapters and blog posts are Markdown (Kramdown + GFM). For a rendered reference of headings, lists, code, tables, footnotes, and more, see the sample post `/blog/hello-world` ([Hello from the blog](https://minitestrails.com/blog/hello-world/)).
+```sh
+bin/setup
+bin/dev
+```
 
-### Tip callouts
+## Writing chapter content {#writing-content}
 
-Render callouts with `Shared::Tip` in guide Markdown via ERB. In `.erb` files use a single `%`; in guide Markdown escape as `%%` so Bridgetown does not evaluate at build time. Blog posts are plain Markdown—no ERB components.
+Guide chapters and blog posts are Markdown (Kramdown + GFM). Guide chapters can also embed components with ERB (see [Tip callouts](#tip-callouts) below). For a comprehensive set of rendered markup examples—headings, emphasis, links, lists, tables, footnotes, and more—see the sample post [Hello from the blog](/blog/hello-world/).
 
-### Code blocks
+### Tip callouts {#tip-callouts}
 
-Fenced blocks with a language tag get syntax highlighting and a **copy** button (see [Code copy](#code-copy)). Examples are in the [Markdown reference post](https://minitestrails.com/blog/hello-world/#inline-and-fenced-code).
+Guide chapters only: render callouts with `Shared::Tip` via ERB in your `.md` file. Blog posts are plain Markdown—no ERB components.
 
-### Blog posts
+<%= render Shared::Tip.new(
+  title: "Guide-only",
+  markdown: "This is a `Shared::Tip` callout. Use it for asides, warnings, or beginner-friendly notes without breaking the flow of your lesson."
+) %>
 
-Posts live in `src/_blog/` with `layout: blog_post`, a `date`, and a `slug`. They appear on the landing page and at `/blog`.
+In your chapter file:
 
-## OG images
+```erb
+<%%= render Shared::Tip.new(
+  title: "Optional title",
+  markdown: "Your **Markdown** body here."
+) %>
+```
+
+### Code blocks {#code-blocks}
+
+Fenced blocks with a language tag get syntax highlighting and a **copy** button (see [Code copy](#code-copy)). Example:
+
+```ruby
+class Welcome
+  def self.message
+    "Your first chapter goes here."
+  end
+end
+```
+
+For inline `` `code` ``, language-tagged fences, and more patterns, see [Inline and fenced code](/blog/hello-world/#inline-and-fenced-code) in the sample blog post.
+
+### Blog posts {#blog-posts}
+
+Posts live in `src/_blog/` with `layout: blog_post`, a `date`, and a `slug`. They appear on the landing page and at `/blog/`.
+
+The shipped sample post [Hello from the blog](/blog/hello-world/) is your Markdown reference: open it in the browser to see every common element rendered, or edit `src/_blog/hello-world.md` to match your voice. It covers headings, emphasis, links, images, lists, blockquotes, code, tables, footnotes, definition lists, and abbreviations—use it when you need to check how something will look before writing a real post.
+
+## OG images {#og-images}
 
 Chapter and blog posts get auto-generated 1200×630 PNGs at build time (saved under `output/og/`).
 
-### Preview in the browser
+### Preview in the browser {#og-preview}
 
 During `bin/dev`, open any OG image directly in the browser by inserting `/og/` into the page URL and appending `.png`:
 
@@ -220,12 +267,12 @@ http://localhost:4000/og/guide/introduction-chapter-zero.png
 
 The pattern is `/og/{collection}/{slug}.png` for `guide` and `blog` collections. Examples:
 
-- Guide chapter: `/og/guide/introduction-chapter-zero.png` (matches `/guide/introduction-chapter-zero/` in development)
+- Guide chapter: `/og/guide/introduction-chapter-zero.png` (matches [this chapter](/guide/introduction-chapter-zero/); development builds only)
 - Blog post: `/og/blog/hello-world.png` (matches `/blog/hello-world/`)
 
 In production, swap the host: `https://yourdomain.com/og/guide/your-chapter-slug.png`.
 
-### Dynamic OG routes
+### Dynamic OG routes {#og-routes}
 
 The `/og/…` URLs are served by a Roda route in `server/routes/og_image.rb`. During `bin/dev`, if a pre-built PNG is missing, the route generates one on the fly from `output/og/{collection}/manifest.json`.
 
@@ -237,7 +284,7 @@ OG_COLLECTIONS = %w[guide blog].freeze
 
 If you add a new collection and want the same `/og/{collection}/{slug}.png` previews, add its label to `OG_COLLECTIONS` in `server/routes/og_image.rb`. For build-time PNG generation, update the matching `OG_COLLECTIONS` constant in `plugins/builders/site_og_images.rb` as well.
 
-### Build dependencies
+### Build dependencies {#og-build-dependencies}
 
 The build needs:
 
@@ -252,6 +299,6 @@ bin/bridgetown deploy
 
 Publish the `output/` folder. Netlify config is included in `netlify.toml`.
 
-## License
+## Reference implementation
 
-MIT. See [LICENSE](LICENSE).
+[minitestrails.com](https://minitestrails.com) runs a full curriculum on this shell.

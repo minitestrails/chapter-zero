@@ -1,0 +1,74 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+cd "$(dirname "$0")/.."
+
+echo "==> Chapter Zero setup"
+echo
+
+if ! command -v ruby >/dev/null 2>&1; then
+  echo "Error: Ruby is not installed."
+  if [ -f .ruby-version ]; then
+    echo "       This project expects $(cat .ruby-version) (see https://www.ruby-lang.org/en/downloads/)."
+  fi
+  exit 1
+fi
+
+if [ -f .ruby-version ]; then
+  expected=$(tr -d '[:space:]' < .ruby-version)
+  if ! ruby -v | grep -qF "${expected#ruby-}"; then
+    echo "Warning: Ruby may not match .ruby-version ($expected). Current: $(ruby -v)"
+  fi
+fi
+
+if ! command -v node >/dev/null 2>&1; then
+  echo "Error: Node.js is not installed (required for frontend assets)."
+  exit 1
+fi
+
+if ! command -v npm >/dev/null 2>&1; then
+  echo "Error: npm is not installed."
+  exit 1
+fi
+
+echo "==> bundle install"
+if bundle check >/dev/null 2>&1; then
+  echo "    Ruby gems already satisfied"
+else
+  bundle install
+fi
+
+echo "==> npm install"
+npm install
+
+echo "==> .env"
+if [ ! -f .env ]; then
+  cp .env.sample .env
+  echo "    Created .env from .env.sample"
+else
+  echo "    .env already exists (skipped)"
+fi
+
+echo "==> Initial site build"
+bundle exec bin/bridgetown build
+
+echo
+echo "Optional (build-time OG PNG generation):"
+og_missing=0
+if ! command -v magick >/dev/null 2>&1 && ! command -v convert >/dev/null 2>&1; then
+  echo "  - ImageMagick (magick or convert) not on PATH"
+  og_missing=1
+fi
+if ! command -v rsvg-convert >/dev/null 2>&1; then
+  echo "  - rsvg-convert (librsvg) not on PATH"
+  og_missing=1
+fi
+if [ "$og_missing" -eq 0 ]; then
+  echo "  ImageMagick and rsvg-convert found."
+else
+  echo "  Install the tools above for per-chapter OG PNGs at build time."
+  echo "  Dynamic /og/… previews during bin/dev still work without them."
+fi
+
+echo
+echo "Done! Run bin/dev and open http://localhost:4000"

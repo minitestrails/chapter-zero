@@ -1,18 +1,25 @@
-<section class="hero <%= Shared::HeroBackground::CLASSES %> min-h-0 py-14 sm:py-20 md:py-24 px-6">
+<section class="hero <%= Shared::HeroBackground::CLASSES %> min-h-0 py-14 sm:py-20 md:py-24 px-4 sm:px-6">
   <div class="hero-content text-center w-full py-0">
     <div class="flex flex-col items-center gap-8 sm:gap-10 max-w-5xl mx-auto">
       <div class="space-y-4 sm:space-y-5">
-        <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold leading-[1.1] tracking-tight">
+        <h1 class="text-3xl sm:text-5xl md:text-6xl font-bold leading-[1.1] tracking-tight">
           The Open-Source Foundation for Your Next Technical Guide.
         </h1>
 
         <p class="text-base sm:text-lg text-base-content/75 max-w-2xl mx-auto leading-relaxed">
-          Built on Bridgetown. Designed for developers who value structure, speed, and maintainable architecture. Before you write Chapter 1, lay the groundwork with Chapter Zero.
+          Designed for developers who value structure, speed, and maintainable architecture. Before you write Chapter 1, lay the groundwork with Chapter Zero.
         </p>
       </div>
 
       <div class="flex flex-wrap justify-center gap-3 sm:gap-4">
-        <%= render Shared::Button.new(text: "Read the introduction", href: "/guide/introduction", classes: "btn-primary") %>
+        <% if show_chapter_zero_intro? %>
+          <div class="flex flex-col items-center gap-2">
+            <%= render Shared::Button.new(text: "Read Chapter Zero Introduction", href: chapter_zero_intro_url, classes: "btn-primary") %>
+            <p class="text-sm text-base-content/70"><em>*This is a development-only chapter.</em></p>
+          </div>
+        <% end %>
+
+        <%= render Shared::Button.new(text: "Read the first lesson", href: "/guide/lesson-one", classes: "btn-primary") %>
         <%= render Shared::Button.new(text: "Browse all chapters", href: "/guide", classes: "btn-outline") %>
       </div>
 

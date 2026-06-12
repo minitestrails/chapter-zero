@@ -47,3 +47,5 @@ gem "dotenv", "~> 3.2"
 
 gem "kramdown", "~> 2.5"
 gem "kramdown-parser-gfm", "~> 1.1"
+
+gem "bridgetown-quick-search", "~> 3.0"

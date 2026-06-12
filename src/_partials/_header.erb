@@ -1,20 +1,30 @@
 <% site_metadata = site.data.site_metadata %>
 
 <header class="bg-base-100 border-b border-base-300">
-  <div class="navbar max-w-6xl mx-auto px-4">
-    <div class="navbar-start">
-      <a href="<%= relative_url '/' %>" class="flex items-center gap-3 min-w-0">
-        <% if site_metadata.logo_path.to_s.strip != "" %>
-          <img src="<%= relative_url site_metadata.logo_path %>" alt="" class="h-8 w-auto shrink-0" width="32" height="32">
-        <% end %>
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="grid grid-cols-[1fr_auto] sm:grid-cols-[1fr_minmax(0,20rem)_1fr] items-center gap-x-2 sm:gap-x-4 gap-y-2 py-2">
+      <div class="col-start-1 row-start-1 flex items-center min-w-0">
+        <a href="<%= relative_url '/' %>" class="flex items-center gap-2 sm:gap-3 min-w-0">
+          <% if site_metadata.logo_path.to_s.strip != "" %>
+            <img src="<%= relative_url site_metadata.logo_path %>" alt="" class="h-8 w-auto shrink-0" width="32" height="32">
+          <% end %>
 
-        <span class="font-bold text-lg truncate"><%= site_metadata.title %></span>
-      </a>
-    </div>
+          <span class="font-bold text-base sm:text-lg truncate"><%= site_metadata.title %></span>
+        </a>
+      </div>
 
-    <div class="navbar-end gap-1">
-      <%= render Shared::Button.new(text: "Blog", href: "/blog", classes: "btn-ghost btn-sm") %>
-      <%= render Shared::Button.new(text: "Guide", href: "/guide", classes: "btn-ghost btn-sm") %>
+      <div class="col-start-2 row-start-1 flex items-center gap-1 justify-self-end sm:col-start-3">
+        <%= render Shared::Button.new(text: "Guide", href: "/guide", classes: "btn-ghost btn-sm px-2 sm:px-3") %>
+        <%= render Shared::Button.new(text: "Blog", href: "/blog", classes: "btn-ghost btn-sm px-2 sm:px-3") %>
+      </div>
+
+      <div class="col-span-2 row-start-2 sm:col-span-1 sm:col-start-2 sm:row-start-1 min-w-0 w-full sm:px-2">
+        <%= liquid_render "bridgetown_quick_search/search",
+              placeholder: "Search…",
+              input_class: "input input-bordered input-sm w-full min-w-0",
+              theme: "dark",
+              display_collection: true %>
+      </div>
     </div>
   </div>
 </header>

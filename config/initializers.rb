@@ -89,7 +89,7 @@ Bridgetown.configure do |config|
   # `.env`. Just `bundle add dotenv` and then uncomment this:
   
   init :dotenv
-  
+  init :"bridgetown-quick-search"
 
   # Uncomment to use Bridgetown SSR (aka dynamic rendering of content via Roda):
   #

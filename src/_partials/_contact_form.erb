@@ -1,5 +1,5 @@
 <div class="max-w-xl mx-auto px-4 py-12">
-  <h1 class="text-3xl font-bold mb-2">Contact</h1>
+  <h1 class="text-2xl sm:text-3xl font-bold mb-2">Contact</h1>
   <p class="text-base-content/80 mb-8">Suggest a missing topic, ask a question, or just say hi.</p>
 
   <% form_action = site.data.site_metadata.contact_form_action rescue nil %>
@@ -23,7 +23,7 @@
     <%= render Shared::Button.new(text: "Send", type: "submit", classes: "btn-primary") %>
   </form>
 
-  <p class="mt-4 text-sm text-base-content/60">Prefer email? <a href="mailto:<%= site.data.site_metadata.email %>" class="link"><%= site.data.site_metadata.email %></a></p>
+  <p class="mt-4 text-sm text-base-content/60">Prefer email? <a href="mailto:<%= site.data.site_metadata.email %>" class="link break-all"><%= site.data.site_metadata.email %></a></p>
 </div>
 
 <script>

@@ -6,8 +6,8 @@ layout: default
 <% guide_resources = guide_resources.sort_by { |r| (r.data.order || 0).to_i } %>
 <% current_url = resource.relative_url %>
 
-<div class="flex flex-col lg:flex-row max-w-7xl mx-auto px-4 py-6 gap-8">
-  <aside class="lg:w-64 flex-shrink-0">
+<div class="flex flex-col lg:flex-row max-w-7xl mx-auto px-4 py-4 sm:py-6 gap-4 lg:gap-8">
+  <aside class="w-full lg:w-64 flex-shrink-0 min-w-0">
     <%= render Guide::Sidebar.new(
           guide_resources: guide_resources,
           current_url: current_url,
@@ -16,14 +16,14 @@ layout: default
   </aside>
 
   <article class="min-w-0 flex-1 lg:max-w-4xl">
-    <h1 class="text-3xl font-bold <%= support_url ? 'mb-2' : 'mb-6' %>"><%= data.title %></h1>
+    <h1 class="text-2xl sm:text-3xl font-bold <%= support_url ? 'mb-2' : 'mb-6' %>"><%= data.title %></h1>
 
     <% if data.is_coming_soon %>
       <%= render Guide::ComingSoon.new(site_metadata: site.data.site_metadata) %>
     <% else %>
       <%= render Guide::SupportButton.new %>
 
-      <div class="prose prose-base max-w-none" data-controller="clipboard">
+      <div class="prose prose-base max-w-none min-w-0 prose-code:break-words prose-pre:overflow-x-auto" data-controller="clipboard">
         <%= yield %>
       </div>
 

@@ -1,12 +1,28 @@
-<nav class="lg:sticky lg:top-6">
+<% menu_markup = capture do %>
   <ul class="menu bg-base-200 rounded-box border border-base-300 w-full p-2">
     <% @guide_resources.each do |chapter| %>
       <li class="<%= chapter.relative_url == @current_url ? 'menu-active' : '' %>">
         <a href="<%= chapter.relative_url %>" class="text-sm">
           <span class="tabular-nums text-base-content/60"><%= chapter.data.order %>.</span>
-          <%= chapter.data.title %>
+          <span class="break-words"><%= chapter.data.title %></span>
         </a>
       </li>
     <% end %>
   </ul>
+<% end %>
+
+<details class="lg:hidden mb-4 rounded-box border border-base-300 bg-base-200">
+  <summary class="px-4 py-3 cursor-pointer font-medium text-sm select-none list-none flex items-center justify-between [&::-webkit-details-marker]:hidden">
+    Chapters
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-4 h-4 shrink-0 opacity-70" aria-hidden="true">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+    </svg>
+  </summary>
+  <div class="px-2 pb-2 border-t border-base-300">
+    <%= menu_markup %>
+  </div>
+</details>
+
+<nav class="hidden lg:block lg:sticky lg:top-6">
+  <%= menu_markup %>
 </nav>

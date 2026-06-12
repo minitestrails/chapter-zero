@@ -1,4 +1,8 @@
 /* Copy code (Stimulus: data-controller="clipboard" on prose wrapper) */
+pre.highlight {
+  padding-top: 2.25rem;
+}
+
 .copy-code-button {
   position: absolute;
   top: 0.5rem;

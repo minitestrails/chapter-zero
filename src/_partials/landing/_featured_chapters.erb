@@ -4,10 +4,10 @@
 
 <% return if featured_chapters.empty? %>
 
-<section class="py-16 px-6 bg-base-200" aria-labelledby="featured-chapters-heading">
+<section class="py-12 sm:py-16 px-4 sm:px-6 bg-base-200" aria-labelledby="featured-chapters-heading">
   <div class="max-w-6xl mx-auto">
     <div class="text-center mb-10 max-w-2xl mx-auto">
-      <h2 id="featured-chapters-heading" class="text-3xl font-bold mb-3">What's in the sample guide</h2>
+      <h2 id="featured-chapters-heading" class="text-2xl sm:text-3xl font-bold mb-3">What's in the sample guide</h2>
       <p class="text-base-content/70">
         All <%= guide_resources.size %> chapters ship as examples. Replace them with your own curriculum.
       </p>
@@ -21,7 +21,7 @@
 
     <div class="mt-10 flex flex-wrap justify-center gap-3">
       <%= render Shared::Button.new(text: "View all chapters", href: "/guide", classes: "btn-primary") %>
-      <%= render Shared::Button.new(text: "Start at the introduction", href: "/guide/introduction", classes: "btn-outline") %>
+      <%= render Shared::Button.new(text: "Start at the first lesson", href: "/guide/lesson-one", classes: "btn-outline") %>
     </div>
   </div>
 </section>
