@@ -19,13 +19,13 @@ bin/dev
 
 ### Prerequisites
 
-- **Ruby** — version in `.ruby-version` (rbenv, asdf, or chruby recommended)
-- **Node.js** + **npm** — for Tailwind, esbuild, and Stimulus
+- **Ruby**: version in `.ruby-version` (rbenv, asdf, or chruby recommended)
+- **Node.js** + **npm**:  for Tailwind, esbuild, and Stimulus
 - **Optional:** ImageMagick (`magick` or `convert`) and `rsvg-convert` (librsvg) for build-time OG PNG generation (see [OG images](#og-images))
 
 Open [http://localhost:4000](http://localhost:4000) (override with `PORT` if needed).
 
-**Read the [introduction chapter](/guide/introduction-chapter-zero/) first** while running `bin/dev` before customizing anything. It explains what ships in the box, how search and OG images work, and the customize checklist—skipping it means re-discovering the same wiring by trial and error. Chapter 0 has `development_only: true` and is omitted from production builds.
+**Read the [introduction chapter](/guide/introduction-chapter-zero/) first** while running `bin/dev` before customizing anything. It explains what ships in the box, how search and OG images work, and the customize checklist - skipping it means re-discovering the same wiring by trial and error. Chapter 0 has `development_only: true` and is omitted from production builds.
 
 After setup, customize site metadata and landing partials, then add your first lesson at `src/_guide/01-your-topic.md` (chapter 1). `/guide/lesson-one` ships as a **coming soon** placeholder so you can see how unpublished chapters look in the sidebar.
 
@@ -113,7 +113,7 @@ Work through these before you write lesson one:
 3. **`src/_data/testimonials.yml`**: reader quotes (`feedback`, `highlighted_text`, optional `image_path` for site images or `image_url` for external URLs). Set `featured: true` on one entry for the spotlight; the masonry grid shows up to `testimonials_max` more (default 5 in `site_metadata.yml`).
 4. **`src/images/`**: logo, favicon, `blog-og-background.png`, `og-image.png` (keep default OG paths in sync with `image` front matter on `index.md` and `guide.md`)
 5. **`config/initializers.rb`**: set production `url` to your domain (`https://yourdomain.com`)
-6. **`src/_guide/01-…`**: your first real content chapter at order 1 (replace or delete the sample lesson-one placeholder when you are ready). Keep `00-introduction-chapter-zero.md` for local docs—it does not publish to production.
+6. **`src/_guide/01-…`**: your first real content chapter at order 1 (replace or delete the sample lesson-one placeholder when you are ready). Keep `00-introduction-chapter-zero.md` for local docs - it does not publish to production.
 
 Set `show_chapter_zero_credit: false` in `site_metadata.yml` if you do not want the footer link to [minitestrails.com/chapter-zero](https://minitestrails.com/chapter-zero).
 
@@ -151,8 +151,8 @@ Search is powered by [bridgetown-quick-search](https://github.com/bridgetownrb/b
 
 Front matter on any page or collection document:
 
-- `exclude_from_search: true` — omit from the index (used on the landing page, contact, and privacy)
-- `quick_search_content: "…"` — override the text indexed for that page (defaults to rendered page content)
+- `exclude_from_search: true` - omit from the index (used on the landing page, contact, and privacy)
+- `quick_search_content: "…"` - override the text indexed for that page (defaults to rendered page content)
 
 ### Component options
 
@@ -172,7 +172,7 @@ The results popup is a shadow-DOM web component. Tweak it in `frontend/styles/br
 
 ## Reader experience extras
 
-These are small UX additions on top of stock Bridgetown—they ship with Chapter Zero and need no extra setup.
+These are small UX additions on top of stock Bridgetown-they ship with Chapter Zero and need no extra setup.
 
 ### Heading anchors
 
@@ -188,7 +188,7 @@ Styles live in `frontend/styles/guide-chapter.css` (`scroll-margin-top` keeps an
 
 ### Code copy
 
-Guide chapters and blog posts wrap prose in `data-controller="clipboard"` (`guide_chapter.erb` and `blog_post.erb`). The Stimulus controller in `frontend/javascript/controllers/clipboard_controller.js` adds a copy button to each `pre.highlight` block. Styles are in `frontend/styles/clipboard.css`. No extra markup in your Markdown—fenced code blocks with a language tag get copy buttons automatically. See [JavaScript with Stimulus](#javascript-with-stimulus) for how controllers are registered.
+Guide chapters and blog posts wrap prose in `data-controller="clipboard"` (`guide_chapter.erb` and `blog_post.erb`). The Stimulus controller in `frontend/javascript/controllers/clipboard_controller.js` adds a copy button to each `pre.highlight` block. Styles are in `frontend/styles/clipboard.css`. No extra markup in your Markdown-fenced code blocks with a language tag get copy buttons automatically. See [JavaScript with Stimulus](#javascript-with-stimulus) for how controllers are registered.
 
 ## Writing chapter content
 
@@ -196,7 +196,7 @@ Guide chapters and blog posts are Markdown (Kramdown + GFM). For a rendered refe
 
 ### Tip callouts
 
-Render callouts with `Shared::Tip` in guide Markdown via ERB. In `.erb` files use a single `%`; in guide Markdown escape as `%%` so Bridgetown does not evaluate at build time. Blog posts are plain Markdown—no ERB components.
+Render callouts with `Shared::Tip` in guide Markdown via ERB. In `.erb` files use a single `%`; in guide Markdown escape as `%%` so Bridgetown does not evaluate at build time. Blog posts are plain Markdown-no ERB components.
 
 ### Code blocks
 

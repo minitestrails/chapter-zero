@@ -1,6 +1,6 @@
 ---
 title: Hello from the blog
-description: A Markdown reference post—headings, lists, code, tables, and more as rendered by Chapter Zero.
+description: A Markdown reference post-headings, lists, code, tables, and more as rendered by Chapter Zero.
 date: 2026-06-01
 layout: blog_post
 slug: hello-world
@@ -16,7 +16,7 @@ Posts live in `src/_blog/` with `layout: blog_post`, a `date`, and a `slug`. Gui
 
 ## Headings {#headings}
 
-Use `##` through `######` for section headings. Add a custom ID with Kramdown attribute syntax: `## Headings {#headings}` (this section uses that—hover the `#` link).
+Use `##` through `######` for section headings. Add a custom ID with Kramdown attribute syntax: `## Headings {#headings}` (this section uses that-hover the `#` link).
 
 ### Third level
 
@@ -153,8 +153,8 @@ The HTML specification is maintained by the W3C.
 
 ## What's not plain Markdown
 
-- **Tip callouts** (`Shared::Tip`) — render via ERB in guide Markdown only; see the introduction chapter.
-- **Heading `#` permalinks** — added automatically by `plugins/builders/heading_anchors.rb` on `h2`–`h4` with IDs.
-- **Code copy buttons** — added by the Stimulus `clipboard` controller on guide and blog prose.
+- **Tip callouts** (`Shared::Tip`) - render via ERB in guide Markdown only; see the introduction chapter.
+- **Heading `#` permalinks** - added automatically by `plugins/builders/heading_anchors.rb` on `h2`–`h4` with IDs.
+- **Code copy buttons** - added by the Stimulus `clipboard` controller on guide and blog prose.
 
 When you are ready, replace this file with your own posts or keep it as an internal style reference.
