@@ -1,0 +1,17 @@
+@import "jit-refresh.css"; /* triggers frontend rebuilds */
+
+/* Set up Tailwind imports */
+@import "tailwindcss";
+
+@import "syntax-highlighting.css";
+@import "guide-chapter.css";
+@import "testimonial-highlight.css";
+@import "clipboard.css";
+@import "landing.css";
+
+/* If you need to add @import statements, add them above plugins */
+@plugin "daisyui" {
+  themes: dark --default;
+}
+
+@plugin "@tailwindcss/typography";

@@ -1,0 +1,33 @@
+title: Chapter Zero
+tagline: The Open-Source Foundation for Your Next Technical Guide.
+email: your-email@example.com
+description: Built on Bridgetown. Designed for developers who value structure, speed, and maintainable architecture. Before you write Chapter 1, lay the groundwork with Chapter Zero.
+logo_path: /images/logos/logo.png
+favicon_path: /images/favicon.png
+apple_touch_icon_path: /images/favicon.png
+# Default Open Graph image (keep in sync with `image` front matter on index.md and guide.md)
+image:
+  path: /images/og-image.png
+  width: 1200
+  height: 630
+
+# Optional: Stripe payment links for the site-wide support banner, footer link, and chapter support buttons.
+# Leave blank to hide support UI. Use a Stripe test-mode link for support_url_development while previewing locally.
+# support_url: "https://buy.stripe.com/your-live-link"
+# support_url_development: "https://buy.stripe.com/test_your-link"
+support_url:
+support_url_development: "https://buy.stripe.com/test_your-link"
+convertkit_form_id:
+convertkit_account:
+google_analytics_id:
+contact_form_action:
+
+# Max testimonials in the landing page masonry grid (featured spotlight is separate)
+testimonials_max: 5
+
+# Set to true to hide the "Suggest a topic" card on /guide
+hide_suggest_topic: false
+
+# Optional footer credit back to the starter repo
+show_chapter_zero_credit: true
+chapter_zero_repo_url: "https://github.com/minitestrails/chapter-zero"

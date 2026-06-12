@@ -1,0 +1,18 @@
+<% blog_resources = site.collections["blog"]&.resources || [] %>
+<% blog_resources = blog_resources.sort_by { |r| r.data.date || "" }.reverse %>
+
+<% return unless blog_resources.any? %>
+
+<section class="py-16 px-6 bg-base-200" aria-labelledby="blog-heading">
+  <div class="max-w-6xl mx-auto">
+    <div class="flex flex-wrap items-end justify-between gap-4 mb-8">
+      <h2 id="blog-heading" class="text-3xl font-bold">From the blog</h2>
+      <a href="<%= relative_url '/blog' %>" class="link link-hover text-sm">All posts</a>
+    </div>
+    <div class="grid gap-6 sm:grid-cols-2">
+      <% blog_resources.first(2).each do |post| %>
+        <%= render Blog::PostCard.new(post: post, card_class: "bg-base-100") %>
+      <% end %>
+    </div>
+  </div>
+</section>

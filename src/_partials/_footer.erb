@@ -1,0 +1,30 @@
+<% site_metadata = site.data.site_metadata %>
+<% support_url = ENV["BRIDGETOWN_ENV"] == "development" ? site_metadata.support_url_development : site_metadata.support_url %>
+
+<footer class="footer footer-center p-6 bg-base-200 text-base-content border-t border-base-300">
+  <aside>
+    <p class="font-bold"><%= site_metadata.title %></p>
+
+    <p><%= site_metadata.tagline %></p>
+
+    <nav class="flex flex-wrap justify-center gap-4 mt-2">
+      <a href="<%= relative_url '/guide' %>" class="link link-hover">Guide</a>
+      <a href="<%= relative_url '/blog' %>" class="link link-hover">Blog</a>
+      <a href="<%= relative_url '/contact' %>" class="link link-hover">Contact</a>
+      <a href="<%= relative_url '/privacy' %>" class="link link-hover">Privacy</a>
+
+      <% if support_url.to_s.strip != "" %>
+        <a href="<%= support_url %>" target="_blank" rel="noopener noreferrer" class="link link-hover">Support the Guide</a>
+      <% end %>
+      <a href="mailto:<%= site_metadata.email %>" class="link link-hover">Email</a>
+    </nav>
+
+    <% if site_metadata.show_chapter_zero_credit %>
+      <p class="mt-3 text-sm text-base-content/70">
+        Built with <a href="https://minitestrails.com/chapter-zero" class="link link-hover" target="_blank" rel="noopener noreferrer">Chapter Zero</a>
+      </p>
+    <% end %>
+
+    <p class="mt-4 text-base-content/80">&copy; <%= Time.now.year %> <%= site_metadata.title %></p>
+  </aside>
+</footer>

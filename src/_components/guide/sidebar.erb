@@ -1,0 +1,12 @@
+<nav class="lg:sticky lg:top-6">
+  <ul class="menu bg-base-200 rounded-box border border-base-300 w-full p-2">
+    <% @guide_resources.each do |chapter| %>
+      <li class="<%= chapter.relative_url == @current_url ? 'menu-active' : '' %>">
+        <a href="<%= chapter.relative_url %>" class="text-sm">
+          <span class="tabular-nums text-base-content/60"><%= chapter.data.order %>.</span>
+          <%= chapter.data.title %>
+        </a>
+      </li>
+    <% end %>
+  </ul>
+</nav>

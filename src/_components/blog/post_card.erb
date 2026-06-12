@@ -1,0 +1,50 @@
+<a
+  href="<%= @post.relative_url %>"
+  class="card <%= @card_class %> min-h-60 shadow-sm hover:shadow-xl border border-base-300 hover:border-primary/40 transition-all duration-300 group h-full overflow-hidden relative"
+>
+  <div
+    class="absolute inset-x-0 top-0 h-24 bg-linear-to-br from-primary/15 via-primary/5 to-transparent pointer-events-none transition-opacity duration-300 group-hover:from-primary/25"
+    aria-hidden="true"
+  ></div>
+  <div
+    class="absolute inset-y-0 left-0 w-1 bg-linear-to-b from-primary via-primary/50 to-transparent opacity-70 group-hover:opacity-100 transition-opacity"
+    aria-hidden="true"
+  ></div>
+
+  <div class="card-body gap-4 flex flex-col h-full relative z-10 pt-6 pb-5">
+    <div class="flex flex-wrap items-center gap-2 relative z-10">
+      <% if formatted_date != "" %>
+        <time datetime="<%= @post.data.date.to_s %>" class="badge badge-ghost badge-sm font-mono tracking-wide">
+          <%= formatted_date %>
+        </time>
+      <% end %>
+      <% if recent? %>
+        <span class="badge badge-primary badge-sm">Latest</span>
+      <% end %>
+    </div>
+
+    <div class="relative z-10 min-w-0 flex-1">
+      <h2 class="card-title text-lg leading-snug text-base-content group-hover:text-primary transition-colors duration-300">
+        <%= @post.data.title %>
+      </h2>
+      <% if @post.data.description %>
+        <p class="text-sm sm:text-base text-base-content/70 line-clamp-3 mt-2 leading-relaxed">
+          <%= @post.data.description %>
+        </p>
+      <% end %>
+    </div>
+
+    <% if tags.any? %>
+      <div class="flex flex-wrap gap-1.5 relative z-10 pt-1">
+        <% tags.each_with_index do |tag, index| %>
+          <span class="badge badge-sm <%= index.zero? ? 'badge-primary' : 'badge-outline' %>"><%= tag %></span>
+        <% end %>
+      </div>
+    <% end %>
+
+    <span class="inline-flex items-center gap-1 text-sm font-medium text-primary mt-auto pt-1 relative z-10 transition-transform duration-300 group-hover:translate-x-1">
+      Read post
+      <span aria-hidden="true">&rarr;</span>
+    </span>
+  </div>
+</a>

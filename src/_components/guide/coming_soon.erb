@@ -1,0 +1,47 @@
+<div class="card bg-base-200 border border-base-300 shadow-sm rounded-box max-w-xl mx-auto my-12">
+  <div class="card-body gap-6">
+    <div class="flex flex-col items-center text-center gap-3">
+      <%# 404-style: torn page + magnifier (empty search / missing document) %>
+      <div class="w-full max-w-[13rem] mx-auto drop-shadow-[0_6px_28px_rgba(0,0,0,0.12)] dark:drop-shadow-[0_8px_32px_rgba(0,0,0,0.35)]" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 168" fill="none" class="w-full h-auto text-primary">
+          <ellipse cx="100" cy="158" rx="56" ry="5" class="fill-base-content/15" />
+          <%# Left page %>
+          <rect x="40" y="46" width="52" height="112" rx="10" class="fill-primary/10 stroke-primary/40" stroke-width="1.5" />
+          <%# Dog-ear fold (top-right of left page) %>
+          <path class="fill-primary/25" d="M82 46h10L82 56z" />
+          <%# Right page (slight tilt, like a loose sheet) %>
+          <g transform="rotate(-4 138 106)">
+            <rect x="100" y="50" width="50" height="108" rx="10" class="fill-primary/10 stroke-primary/40" stroke-width="1.5" />
+          </g>
+          <%# Jagged “tear” between the two halves %>
+          <path
+            class="stroke-primary/55"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M98 52c1.2 5.5-.8 11 .5 16.5s-1 11 .5 16.5-1 11 .5 16.5-1.2 11 .3 16.5-.9 10.8.4 16"
+          />
+          <%# Skeleton lines %>
+          <path class="stroke-base-content/25" stroke-width="2" stroke-linecap="round" d="M48 70h30M48 82h24M48 94h32" />
+          <%# Magnifying glass %>
+          <circle cx="128" cy="70" r="23" class="fill-base-200/90 stroke-primary" stroke-width="2.5" />
+          <path class="stroke-primary" stroke-width="3.5" stroke-linecap="round" d="M145 87l24 24" />
+        </svg>
+      </div>
+
+      <p class="text-lg text-base-content leading-relaxed"><%= @message %></p>
+    </div>
+
+    <div class="divider my-0"></div>
+
+    <div class="text-center">
+      <h2 class="text-xl font-bold mb-2"><%= @newsletter_heading %></h2>
+      <p class="text-base-content/80 mb-4"><%= @newsletter_subtext %></p>
+      <% if @convertkit_form_id.to_s.strip != "" %>
+        <%= render Shared::NewsletterForm.new(convertkit_form_id: @convertkit_form_id) %>
+      <% else %>
+        <p class="text-sm text-base-content/60">Set <code>convertkit_form_id</code> in <code>src/_data/site_metadata.yml</code> to enable the newsletter form.</p>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,5 @@
+<% if link? %>
+  <a href="<%= external_href? ? @href : relative_url(@href) %>" class="<%= button_classes %>"><%= @text %></a>
+<% else %>
+  <button type="<%= @type || 'button' %>" class="<%= button_classes %>"><%= @text %></button>
+<% end %>

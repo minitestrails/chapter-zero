@@ -1,0 +1,49 @@
+<% testimonials = Array((site.data.testimonials rescue [])) %>
+<% featured = testimonials.find { |testimonial_entry| testimonial_entry["featured"] || testimonial_entry[:featured] } %>
+<% return unless featured %>
+
+<% prepared = testimonial_data(featured) %>
+<% entry = prepared[:entry] %>
+
+<section class="py-12 px-6 bg-base-200/80 border-b border-base-300" aria-label="Featured testimonial">
+  <div class="max-w-4xl mx-auto">
+    <div class="card">
+      <div class="card-body p-6 md:p-8">
+        <div class="relative overflow-x-clip">
+          <div class="absolute -left-2 md:-left-6 top-0 pointer-events-none" aria-hidden="true">
+            <span class="text-[8rem] md:text-[12rem] font-black text-primary/10 leading-none select-none">"</span>
+          </div>
+
+          <div class="relative pl-2 md:pl-8 text-center md:text-left">
+            <p class="text-xl md:text-2xl font-light text-base-content leading-relaxed mb-8 [&_.testimonial-highlight]:text-base-content">
+              <%= raw(prepared[:feedback_html]) %>
+            </p>
+
+            <div class="flex items-center gap-4 justify-center md:justify-start">
+              <% if prepared[:image_src] != "" %>
+                <div class="w-14 h-14 rounded-2xl overflow-hidden ring ring-base-300 ring-offset-2 ring-offset-base-200 shrink-0">
+                  <img src="<%= prepared[:image_src] %>" alt="<%= ERB::Util.html_escape entry["name"].to_s %>" class="w-full h-full object-cover" width="56" height="56" loading="lazy" decoding="async">
+                </div>
+              <% else %>
+                <div class="w-14 h-14 rounded-2xl bg-primary flex items-center justify-center shrink-0">
+                  <span class="text-lg font-bold text-primary-content"><%= prepared[:initials] %></span>
+                </div>
+              <% end %>
+
+              <div class="text-left min-w-0">
+                <div class="font-bold text-base-content text-lg"><%= entry["name"] %></div>
+                <% if entry["position"].to_s.strip != "" %>
+                  <div class="text-base-content/70 text-sm"><%= entry["position"] %></div>
+                <% end %>
+
+                <% if entry["website_url"].to_s.strip != "" %>
+                  <a href="<%= entry["website_url"] %>" target="_blank" rel="noopener noreferrer" class="link link-hover text-sm inline-block mt-1"><% company_name = entry["company"].to_s.strip %><%= company_name != "" ? company_name : "Website" %></a>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

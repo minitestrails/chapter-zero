@@ -1,0 +1,38 @@
+<% prepared = prepared_testimonial %>
+<% entry = prepared[:entry] %>
+
+<article class="card bg-base-200 border border-base-300 shadow-sm">
+  <div class="card-body gap-5 p-5 sm:p-6">
+    <p class="text-base text-base-content/90 leading-relaxed [&_.testimonial-highlight]:text-base-content">
+      <%= raw(prepared[:feedback_html]) %>
+    </p>
+
+    <div class="flex items-center gap-3 pt-1">
+      <% if prepared[:image_src] != "" %>
+        <div class="avatar shrink-0">
+          <div class="w-12 rounded-full">
+            <img src="<%= prepared[:image_src] %>" alt="<%= ERB::Util.html_escape entry["name"].to_s %>" width="48" height="48" loading="lazy" decoding="async">
+          </div>
+        </div>
+      <% else %>
+        <div class="avatar placeholder shrink-0">
+          <div class="bg-primary text-primary-content w-12 rounded-full">
+            <span class="text-sm font-semibold"><%= prepared[:initials] %></span>
+          </div>
+        </div>
+      <% end %>
+
+      <div class="min-w-0 text-left">
+        <div class="font-semibold text-base-content leading-tight"><%= entry["name"] %></div>
+        <% if entry["position"].to_s.strip != "" %>
+          <div class="text-sm text-base-content/70"><%= entry["position"] %></div>
+        <% end %>
+        <% if entry["website_url"].to_s.strip != "" %>
+          <a href="<%= entry["website_url"] %>" target="_blank" rel="noopener noreferrer" class="link link-hover text-sm inline-block mt-0.5"><% company_name = entry["company"].to_s.strip %><%= company_name != "" ? company_name : "Website" %></a>
+        <% elsif entry["company"].to_s.strip != "" %>
+          <div class="text-sm text-base-content/70 mt-0.5"><%= entry["company"] %></div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</article>

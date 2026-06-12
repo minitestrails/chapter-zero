@@ -1,0 +1,20 @@
+<% site_metadata = site.data.site_metadata %>
+
+<header class="bg-base-100 border-b border-base-300">
+  <div class="navbar max-w-6xl mx-auto px-4">
+    <div class="navbar-start">
+      <a href="<%= relative_url '/' %>" class="flex items-center gap-3 min-w-0">
+        <% if site_metadata.logo_path.to_s.strip != "" %>
+          <img src="<%= relative_url site_metadata.logo_path %>" alt="" class="h-8 w-auto shrink-0" width="32" height="32">
+        <% end %>
+
+        <span class="font-bold text-lg truncate"><%= site_metadata.title %></span>
+      </a>
+    </div>
+
+    <div class="navbar-end gap-1">
+      <%= render Shared::Button.new(text: "Blog", href: "/blog", classes: "btn-ghost btn-sm") %>
+      <%= render Shared::Button.new(text: "Guide", href: "/guide", classes: "btn-ghost btn-sm") %>
+    </div>
+  </div>
+</header>

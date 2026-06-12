@@ -1,0 +1,24 @@
+<% all_testimonials = Array((site.data.testimonials rescue [])) %>
+<% site_metadata = site.data.site_metadata %>
+<% max_count = (site_metadata["testimonials_max"] || site_metadata[:testimonials_max] || 5).to_i %>
+<% max_count = 5 if max_count <= 0 %>
+<% testimonials = all_testimonials.reject { |testimonial_entry| testimonial_entry["featured"] || testimonial_entry[:featured] }.first(max_count) %>
+
+<% return if testimonials.empty? %>
+
+<section class="py-16 px-6 bg-base-200" aria-labelledby="testimonials-heading">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-10 max-w-2xl mx-auto">
+      <h2 id="testimonials-heading" class="text-3xl font-bold mb-3">What readers say</h2>
+      <p class="text-base-content/70">Replace entries in src/_data/testimonials.yml with quotes from your readers.</p>
+    </div>
+
+    <div class="columns-1 gap-x-6 sm:columns-2 lg:columns-3">
+      <% testimonials.each do |testimonial| %>
+        <div class="mb-6 break-inside-avoid">
+          <%= render Shared::Testimonial.new(testimonial: testimonial) %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>

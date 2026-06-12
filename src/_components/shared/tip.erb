@@ -1,0 +1,8 @@
+<aside role="note" class="card bg-base-200 border border-base-300 rounded-box shadow-sm my-6" aria-label="<%= @title %>">
+  <div class="card-body gap-3 py-5">
+    <span class="w-fit"><%= render Shared::Badge.new(text: @title, classes: "badge-primary badge-sm") %></span>
+    <div class="prose prose-base max-w-none">
+      <%= body_html %>
+    </div>
+  </div>
+</aside>

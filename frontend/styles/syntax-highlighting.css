@@ -1,0 +1,161 @@
+/*
+  Rouge / Bridgetown syntax highlighting, tuned for DaisyUI dark + prose.
+
+  Default Bridgetown + GitHub-light Pygments used a light pre background while
+  @tailwindcss/typography (inside :root.dark) still set pre text to light
+  "pre code" colors. Result: washed-out or invisible tokens. This file uses a
+  dark panel and a One-dark-style token palette so contrast stays high.
+*/
+
+.prose pre.highlight {
+  /* Reset prose "inverted pre" vars so nested code does not inherit light-on-light */
+  --tw-prose-pre-code: var(--color-base-content);
+  --tw-prose-pre-bg: var(--color-base-300);
+}
+
+pre.highlight {
+  position: relative;
+  padding: 0.875rem 1.125rem;
+  margin: 0;
+  overflow-x: auto;
+  color: var(--color-base-content);
+  background-color: var(--color-base-300);
+  border: 1px solid color-mix(in oklab, var(--color-base-content) 12%, transparent);
+  border-radius: var(--radius-box, 0.5rem);
+}
+
+.highlight .hll {
+  background-color: color-mix(in oklab, var(--color-warning) 22%, transparent);
+}
+
+.highlight .c,
+.highlight .cm,
+.highlight .c1,
+.highlight .cs {
+  color: color-mix(in oklab, var(--color-base-content) 55%, transparent);
+  font-style: italic;
+}
+
+.highlight .err {
+  color: var(--color-error);
+  background-color: color-mix(in oklab, var(--color-error) 18%, transparent);
+}
+
+.highlight .k,
+.highlight .kc,
+.highlight .kd,
+.highlight .kn,
+.highlight .kp,
+.highlight .kr,
+.highlight .o,
+.highlight .ow {
+  color: var(--color-secondary);
+  font-weight: 600;
+}
+
+.highlight .cp,
+.highlight .kt {
+  color: var(--color-info);
+  font-weight: 600;
+}
+
+.highlight .m,
+.highlight .mf,
+.highlight .mh,
+.highlight .mi,
+.highlight .mo,
+.highlight .il {
+  color: var(--color-accent);
+}
+
+.highlight .s,
+.highlight .sb,
+.highlight .sc,
+.highlight .sd,
+.highlight .s2,
+.highlight .se,
+.highlight .sh,
+.highlight .si,
+.highlight .sx,
+.highlight .s1,
+.highlight .sr {
+  color: var(--color-success);
+}
+
+.highlight .ss {
+  color: var(--color-primary);
+}
+
+.highlight .na,
+.highlight .nb,
+.highlight .no,
+.highlight .nv,
+.highlight .vc,
+.highlight .vg,
+.highlight .vi {
+  color: var(--color-info);
+}
+
+.highlight .nc,
+.highlight .nf,
+.highlight .ne,
+.highlight .nl {
+  color: var(--color-warning);
+  font-weight: 600;
+}
+
+.highlight .nd,
+.highlight .ni {
+  color: var(--color-accent);
+}
+
+.highlight .nn,
+.highlight .gp {
+  color: color-mix(in oklab, var(--color-base-content) 72%, transparent);
+}
+
+.highlight .nt {
+  color: var(--color-error);
+  font-weight: 600;
+}
+
+.highlight .gd {
+  color: var(--color-base-content);
+  background-color: color-mix(in oklab, var(--color-error) 22%, transparent);
+}
+
+.highlight .ge {
+  color: var(--color-base-content);
+  font-style: italic;
+}
+
+.highlight .gr,
+.highlight .gt {
+  color: var(--color-error);
+}
+
+.highlight .gh,
+.highlight .gu {
+  color: color-mix(in oklab, var(--color-base-content) 50%, transparent);
+}
+
+.highlight .gi {
+  color: var(--color-base-content);
+  background-color: color-mix(in oklab, var(--color-success) 22%, transparent);
+}
+
+.highlight .go {
+  color: color-mix(in oklab, var(--color-base-content) 65%, transparent);
+}
+
+.highlight .gs {
+  font-weight: 700;
+}
+
+.highlight .w {
+  color: color-mix(in oklab, var(--color-base-content) 35%, transparent);
+}
+
+.highlight .bp {
+  color: color-mix(in oklab, var(--color-base-content) 55%, transparent);
+}

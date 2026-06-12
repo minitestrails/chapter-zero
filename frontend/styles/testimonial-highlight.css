@@ -1,0 +1,39 @@
+/* Rough chisel-tip highlighter (layered translucent strokes + jagged SVG mask). */
+
+:root {
+  --testimonial-marker-color: var(--color-primary);
+}
+
+@layer components {
+  .testimonial-highlight {
+    @apply font-medium text-base-content box-decoration-clone;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+    /* Extra bottom padding so descenders (g, y, p) sit inside the painted + masked box */
+    padding: 0.12em 0.24em 0.28em 0.2em;
+    color: var(--testimonial-marker-foreground, var(--color-base-content));
+    /* Overlapping strokes read darker where they cross (like real marker ink) */
+    background-image:
+      linear-gradient(
+        98deg,
+        color-mix(in oklab, var(--testimonial-marker-color) 58%, transparent) 0%,
+        color-mix(in oklab, var(--testimonial-marker-color) 24%, transparent) 48%,
+        color-mix(in oklab, var(--testimonial-marker-color) 50%, transparent) 100%
+      ),
+      linear-gradient(
+        188deg,
+        color-mix(in oklab, var(--testimonial-marker-color) 40%, transparent) 0%,
+        transparent 72%
+      );
+    background-blend-mode: multiply;
+    /* Jagged top + bottom; path must reach y=100 so descenders are not masked out */
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpath fill='white' d='M0 6 L8 3 L10 6 L18 4 L20 6 L30 4 L40 6 L50 4 L60 6 L70 4 L80 6 L90 4 L100 6 L100 100 L98 100 L94 99 L90 100 L86 99 L82 100 L78 99 L74 100 L70 99 L66 100 L62 99 L58 100 L54 99 L50 100 L46 99 L42 100 L38 99 L34 100 L30 99 L26 100 L22 99 L18 100 L14 99 L10 100 L6 99 L2 100 L0 99 Z'/%3E%3C/svg%3E");
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpath fill='white' d='M0 6 L8 3 L10 6 L18 4 L20 6 L30 4 L40 6 L50 4 L60 6 L70 4 L80 6 L90 4 L100 6 L100 100 L98 100 L94 99 L90 100 L86 99 L82 100 L78 99 L74 100 L70 99 L66 100 L62 99 L58 100 L54 99 L50 100 L46 99 L42 100 L38 99 L34 100 L30 99 L26 100 L22 99 L18 100 L14 99 L10 100 L6 99 L2 100 L0 99 Z'/%3E%3C/svg%3E");
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+  }
+}

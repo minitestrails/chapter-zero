@@ -1,0 +1,18 @@
+<% site_metadata = site.data.site_metadata %>
+
+<section id="newsletter" class="py-16 px-6" aria-labelledby="newsletter-heading">
+  <div class="max-w-xl mx-auto text-center">
+    <h2 id="newsletter-heading" class="text-2xl font-bold mb-4">New chapters land in your inbox</h2>
+    <p class="text-base-content/80 mb-6">
+      Hook up ConvertKit in site_metadata.yml. Until then, this section renders without a form.
+    </p>
+    <%= render Shared::NewsletterForm.new(
+          convertkit_form_id: (site_metadata.convertkit_form_id rescue nil),
+          convertkit_account: (site_metadata.convertkit_account rescue nil)
+        ) %>
+    <p class="mt-6 text-sm text-base-content/60">
+      Prefer to read now?
+      <a href="<%= relative_url '/guide/introduction' %>" class="link link-hover text-primary">Start with the introduction</a>.
+    </p>
+  </div>
+</section>

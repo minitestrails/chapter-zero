@@ -1,0 +1,36 @@
+<div class="max-w-xl mx-auto px-4 py-12">
+  <h1 class="text-3xl font-bold mb-2">Contact</h1>
+  <p class="text-base-content/80 mb-8">Suggest a missing topic, ask a question, or just say hi.</p>
+
+  <% form_action = site.data.site_metadata.contact_form_action rescue nil %>
+
+  <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="flex flex-col gap-4">
+    <input type="hidden" name="form-name" value="contact">
+
+    <div class="hidden">
+      <label>
+        Don't fill this out if you're human: <input name="bot-field">
+      </label>
+    </div>
+
+    <fieldset class="fieldset flex flex-col gap-4">
+      <%= render Form::Field.new(label: "Name", name: "name", required: true, classes: "input-bordered") %>
+      <%= render Form::Field.new(label: "Email", name: "email", type: "email", required: true, classes: "input-bordered") %>
+      <%= render Form::Field.new(label: "Subject", name: "subject", placeholder: "e.g. Missing Topic or General query", classes: "input-bordered" ) %>
+      <%= render Form::Field.new(label: "Message", name: "message", type: "textarea", rows: 5, required: true, classes: "textarea-bordered") %>
+    </fieldset>
+
+    <%= render Shared::Button.new(text: "Send", type: "submit", classes: "btn-primary") %>
+  </form>
+
+  <p class="mt-4 text-sm text-base-content/60">Prefer email? <a href="mailto:<%= site.data.site_metadata.email %>" class="link"><%= site.data.site_metadata.email %></a></p>
+</div>
+
+<script>
+  (function() {
+    var params = new URLSearchParams(window.location.search);
+    var subject = params.get('subject');
+    var el = document.getElementById('subject');
+    if (subject && el) el.value = decodeURIComponent(subject);
+  })();
+</script>

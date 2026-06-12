@@ -1,0 +1,17 @@
+<div class="card bg-base-200 border border-base-300 shadow-sm my-8 not-prose" aria-labelledby="content-feedback-heading">
+  <div class="card-body flex flex-col sm:flex-row sm:items-center gap-4 py-6">
+    <div class="flex-1 min-w-0">
+      <p id="content-feedback-heading" class="text-lg font-semibold text-base-content">
+        How was this <%= @label %>?
+      </p>
+
+      <p class="text-sm text-base-content/70 mt-2">
+        Tell me what helped, what was unclear, or what to improve. I read every message.
+      </p>
+    </div>
+    <a
+      href="<%= relative_url '/contact' %>?subject=<%= ERB::Util.url_encode(feedback_subject) %>"
+      class="btn btn-primary btn-sm btn-outline"
+    >Send feedback</a>
+  </div>
+</div>

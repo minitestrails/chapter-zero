@@ -1,0 +1,39 @@
+- name: Alex Dev
+  featured: true
+  company: Example Co
+  position: Software Engineer
+  feedback: "Placeholder featured quote. Set featured: true on one entry in testimonials.yml to show it in the spotlight below the hero."
+  website_url: "https://example.com"
+  highlighted_text: ["testimonials.yml"]
+  image_url: "https://i.pravatar.cc/96?u=alex-dev"
+- name: Sam Writer
+  company: Dev Books
+  position: Technical author
+  feedback: "Chapter Zero gave me the landing page, sidebar, and OG images without rebuilding the same Bridgetown shell again."
+  website_url: "https://example.com"
+  image_url: "https://i.pravatar.cc/96?u=sam-writer"
+- name: Jordan Lee
+  company: Studio Nine
+  position: Indie educator
+  feedback: "I forked the repo on Monday and had a polished guide index live by Friday. I edited the hero partial, dropped in two real testimonials, and the masonry grid reflowed on its own without me touching layout CSS."
+  website_url: "https://example.com"
+  image_url: "https://i.pravatar.cc/96?u=jordan-lee"
+- name: Priya Nair
+  company: Hashline
+  position: Staff engineer
+  feedback: "The coming-soon chapter layout is exactly what I needed while drafting lessons."
+  website_url: "https://example.com"
+  image_path: /images/logos/logo.png
+- name: Chris Ortiz
+  company: Brickwork Press
+  position: Developer advocate
+  feedback: "ConvertKit, GA, and the privacy page were already wired. I spent time on content, not plumbing. The testimonials section uses CSS columns so cards of different heights pack like a Pinterest board."
+  website_url: "https://example.com"
+  image_url: "https://i.pravatar.cc/96?u=chris-ortiz"
+- name: Morgan Ellis
+  company: Field Notes
+  position: Curriculum designer
+  feedback: "Six entries ship in the sample file on purpose: one featured spotlight plus five in the grid because testimonials_max is 5 in site_metadata.yml. This card is the one that gets clipped when you hit the max."
+  website_url: "https://example.com"
+  highlighted_text: ["testimonials_max"]
+  image_url: "https://i.pravatar.cc/96?u=morgan-ellis"

@@ -1,0 +1,48 @@
+<section class="py-16 px-6 bg-base-200/80 border-y border-base-300" aria-labelledby="how-it-works-heading">
+  <div class="max-w-6xl mx-auto">
+    <h2 id="how-it-works-heading" class="text-3xl font-bold text-center mb-3">Start here in three steps</h2>
+
+    <p class="text-center text-base-content/70 mb-10 max-w-2xl mx-auto">
+      You don't need to customize everything on day one. Fork the repo, skim chapter zero, then add your first real lesson.
+    </p>
+
+    <ol class="grid gap-4 md:grid-cols-3">
+      <li class="card bg-base-100 border border-base-300 shadow-sm">
+        <div class="card-body">
+          <span class="w-fit mb-2"><%= render Shared::Badge.new(text: "Step 1", classes: "badge-primary badge-outline badge-sm") %></span>
+          <h3 class="card-title text-lg">Read chapter zero</h3>
+          <p class="text-sm text-base-content/70 grow">Learn what ships in the box - layouts, collections, YAML config, and where your content files live.</p>
+          <div class="card-actions justify-start mt-2">
+            <a href="<%= relative_url '/guide/introduction' %>" class="hover:underline hover:text-primary">Read the introduction →</a>
+          </div>
+        </div>
+      </li>
+
+      <li class="card bg-base-100 border border-base-300 shadow-sm">
+        <div class="card-body">
+          <span class="w-fit mb-2"><%= render Shared::Badge.new(text: "Step 2", classes: "badge-primary badge-outline badge-sm") %></span>
+          <h3 class="card-title text-lg">Customize the scaffold</h3>
+          <p class="text-sm text-base-content/70 grow">Set your title and tagline in site_metadata.yml, edit landing partials under src/_partials/landing/, and swap placeholder images.</p>
+          <div class="card-actions justify-start mt-2">
+            <a href="<%= relative_url '/guide/introduction#customize' %>" class="hover:underline hover:text-primary">Open the checklist →</a>
+          </div>
+        </div>
+      </li>
+
+      <li class="card bg-base-100 border border-base-300 shadow-sm">
+        <div class="card-body">
+          <span class="w-fit mb-2"><%= render Shared::Badge.new(text: "Step 3", classes: "badge-primary badge-outline badge-sm") %></span>
+          <h3 class="card-title text-lg">Publish lesson one</h3>
+          <p class="text-sm text-base-content/70 grow">Add src/_guide/02-your-topic.md with order, slug, and layout guide_chapter. Use is_coming_soon until you are ready.</p>
+          <div class="card-actions justify-start mt-2">
+            <a href="<%= relative_url '/guide/lesson-one' %>" class="hover:underline hover:text-primary">Preview a placeholder chapter →</a>
+          </div>
+        </div>
+      </li>
+    </ol>
+
+    <p class="mt-8 text-center">
+      <%= render Shared::Button.new(text: "Open the introduction", href: "/guide/introduction", classes: "btn-primary") %>
+    </p>
+  </div>
+</section>

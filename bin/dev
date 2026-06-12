@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+
+# Default to port 4000 if not specified
+export PORT="${PORT:-4000}"
+
+bin/bridgetown s

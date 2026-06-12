@@ -1,0 +1,27 @@
+<% guide_resources = site.collections["guide"]&.resources || [] %>
+<% guide_resources = guide_resources.sort_by { |r| (r.data.order || 0).to_i } %>
+<% featured_chapters = guide_resources.select { |chapter| chapter.data.featured } %>
+
+<% return if featured_chapters.empty? %>
+
+<section class="py-16 px-6 bg-base-200" aria-labelledby="featured-chapters-heading">
+  <div class="max-w-6xl mx-auto">
+    <div class="text-center mb-10 max-w-2xl mx-auto">
+      <h2 id="featured-chapters-heading" class="text-3xl font-bold mb-3">What's in the sample guide</h2>
+      <p class="text-base-content/70">
+        All <%= guide_resources.size %> chapters ship as examples. Replace them with your own curriculum.
+      </p>
+    </div>
+
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <% featured_chapters.each do |chapter| %>
+        <%= render Guide::ChapterCard.new(chapter: chapter) %>
+      <% end %>
+    </div>
+
+    <div class="mt-10 flex flex-wrap justify-center gap-3">
+      <%= render Shared::Button.new(text: "View all chapters", href: "/guide", classes: "btn-primary") %>
+      <%= render Shared::Button.new(text: "Start at the introduction", href: "/guide/introduction", classes: "btn-outline") %>
+    </div>
+  </div>
+</section>

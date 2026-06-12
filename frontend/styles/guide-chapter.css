@@ -1,0 +1,17 @@
+/* Heading anchors: shareable section links (injected by plugins/builders/heading_anchors.rb) */
+.prose .heading-anchor {
+  text-decoration: none;
+  color: var(--color-primary, currentColor);
+  opacity: 0.4;
+  margin-left: 0.25rem;
+  font-weight: 400;
+}
+.prose .heading-anchor:hover {
+  opacity: 1;
+}
+.prose h2[id], .prose h3[id], .prose h4[id] {
+  scroll-margin-top: 5rem;
+}
+.prose :target {
+  scroll-margin-top: 5rem;
+}

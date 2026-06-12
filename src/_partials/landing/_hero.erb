@@ -1,0 +1,30 @@
+<section class="hero <%= Shared::HeroBackground::CLASSES %> min-h-0 py-14 sm:py-20 md:py-24 px-6">
+  <div class="hero-content text-center w-full py-0">
+    <div class="flex flex-col items-center gap-8 sm:gap-10 max-w-5xl mx-auto">
+      <div class="space-y-4 sm:space-y-5">
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold leading-[1.1] tracking-tight">
+          The Open-Source Foundation for Your Next Technical Guide.
+        </h1>
+
+        <p class="text-base sm:text-lg text-base-content/75 max-w-2xl mx-auto leading-relaxed">
+          Built on Bridgetown. Designed for developers who value structure, speed, and maintainable architecture. Before you write Chapter 1, lay the groundwork with Chapter Zero.
+        </p>
+      </div>
+
+      <div class="flex flex-wrap justify-center gap-3 sm:gap-4">
+        <%= render Shared::Button.new(text: "Read the introduction", href: "/guide/introduction", classes: "btn-primary") %>
+        <%= render Shared::Button.new(text: "Browse all chapters", href: "/guide", classes: "btn-outline") %>
+      </div>
+
+      <div
+        class="w-full max-w-2xl pt-8 sm:pt-10 border-t border-base-300/60 flex flex-wrap justify-center gap-2 sm:gap-2.5"
+        aria-label="Guide at a glance"
+      >
+        <%= render Shared::Badge.new(text: "Markdown chapters", classes: "badge-ghost badge-sm") %>
+        <%= render Shared::Badge.new(text: "DaisyUI + Tailwind", classes: "badge-ghost badge-sm") %>
+        <%= render Shared::Badge.new(text: "Dynamic OG images", classes: "badge-ghost badge-sm") %>
+        <%= render Shared::Badge.new(text: "Component-based", classes: "badge-ghost badge-sm") %>
+      </div>
+    </div>
+  </div>
+</section>

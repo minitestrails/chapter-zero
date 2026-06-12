@@ -1,0 +1,52 @@
+/* Copy code (Stimulus: data-controller="clipboard" on prose wrapper) */
+.copy-code-button {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.35rem 0.45rem;
+  border-radius: var(--radius-field, 0.25rem);
+  border: 1px solid color-mix(in oklab, var(--color-base-content) 14%, transparent);
+  background-color: color-mix(in oklab, var(--color-base-100) 88%, transparent);
+  color: color-mix(in oklab, var(--color-base-content) 72%, transparent);
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.15s ease, border-color 0.15s ease, background-color 0.15s ease;
+}
+
+pre.highlight:hover .copy-code-button,
+.copy-code-button:focus-visible {
+  opacity: 1;
+}
+
+.copy-code-button:hover {
+  background-color: var(--color-base-100);
+  border-color: color-mix(in oklab, var(--color-base-content) 22%, transparent);
+  color: var(--color-base-content);
+}
+
+.copy-code-button:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.copy-code-button svg {
+  display: block;
+}
+
+.copy-code-button .hidden {
+  display: none;
+}
+
+.copy-code-button .check-icon {
+  color: var(--color-success);
+}
+
+@media (hover: none) {
+  .copy-code-button {
+    opacity: 1;
+  }
+}
