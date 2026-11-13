@@ -25,10 +25,10 @@ git_source(:codeberg) { "https://codeberg.org/#{_1}.git" }
 
 # If you need to upgrade/switch Bridgetown versions, change the line below
 # and then run `bundle update bridgetown`
-gem "bridgetown", "~> 2.1.1"
+gem "bridgetown", "~> 2.2.2"
 
 # Uncomment to add file-based dynamic routing to your project:
-# gem "bridgetown-routes", "~> 2.1.1"
+# gem "bridgetown-routes", "~> 2.2.2"
 
 # Puma is the Rack-compatible web server used by Bridgetown
 # (you can optionally limit this to the "development" group)
